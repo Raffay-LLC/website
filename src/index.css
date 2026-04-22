@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+/* Inter loaded non-blocking via <link> in index.html — not here to avoid render-blocking @import */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #ffffff;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prevent layout shift from sticky header shadow transition */
+header {
+  will-change: box-shadow;
+}
+
+/* Prevent invisible CLS from lucide SVG icons before paint */
+svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Defer rendering of off-screen sections — big LCP/CLS win */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}

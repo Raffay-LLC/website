@@ -1,0 +1,5 @@
+# www → apex (must be first, more specific rules before the catch-all)
+https://www.raffayllc.com/* https://raffayllc.com/:splat 301!
+
+# SPA catch-all — serves index.html for every path Netlify can't find a file for
+/*  /index.html  200
