@@ -1,7 +1,10 @@
 # www -> apex (specific rules before the catch-all)
 https://www.raffaysajjad.com/* https://raffaysajjad.com/:splat 301!
 
-# Single page: the root is served from index.html. Any other path that is not
-# a real file (Netlify serves existing files first) returns a real 404.
+# "Ask about my work" function (netlify/functions/ask.ts)
+/api/ask  /.netlify/functions/ask  200
+
+# Every prerendered route is a real file (dist/index.html, dist/work/<slug>/index.html),
+# which Netlify serves before any rule below. Anything else is a real 404.
 /  /index.html  200
 /*  /404.html  404

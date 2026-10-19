@@ -1,206 +1,82 @@
-import {
-  LINKS,
-  NOTES_BASE_URL,
-  NOW,
-  PROFILE,
-  WORK,
-  WRITING,
-  type Span,
-} from './content'
+import { PROFILE } from './content'
+import { LocalTime, Toaster } from './components/Bits'
+import { toggleTheme, useModKey } from './lib/utils'
+import { Palette } from './components/Palette'
+import Home from './pages/Home'
+import Work from './pages/Work'
+import { projectFor } from './seo'
 
-function Spans({ items }: { items: Span[] }) {
+function Header({ route }: { route: string }) {
+  const base = route === '/' ? '' : '/'
+  const links = [
+    ['Work', '#work'],
+    ['Experience', '#experience'],
+    ['Now', '#now'],
+    ['Writing', '#writing'],
+    ['Contact', '#contact'],
+  ]
   return (
-    <>
-      {items.map((item, i) =>
-        typeof item === 'string' ? (
-          item
-        ) : (
-          <a key={i} href={item.href}>
-            {item.text}
-          </a>
-        ),
-      )}
-    </>
+    <header className="bar">
+      <div className="wrap bar-in">
+        <a className="brand" href="/" aria-label={`${PROFILE.name}, home`}>
+          <span className="brand-mark" aria-hidden="true" />
+          {PROFILE.name}
+        </a>
+        <nav aria-label="Sections">
+          <ul className="nav">
+            {links.map(([label, hash]) => (
+              <li key={hash}>
+                <a href={`${base}${hash}`}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="bar-right">
+          <span className="clock mono" aria-label="Local time in Lahore">
+            <LocalTime timeZone={PROFILE.timeZone} city="Lahore" fallback="Lahore, PK" short />
+          </span>
+          <Palette route={route} />
+        </div>
+      </div>
+    </header>
   )
 }
 
-function displayUrl(href: string) {
-  return href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+function Footer() {
+  const mod = useModKey()
+  return (
+    <footer className="foot">
+      <div className="wrap foot-in">
+        <p>
+          © 2026 {PROFILE.name}. Made in Lahore. Updated <time dateTime={PROFILE.updatedIso}>{PROFILE.updated}</time>.
+        </p>
+        <p className="foot-keys mono">
+          <span>
+            <kbd className="kbd">{mod === '⌘' ? '⌘K' : `${mod} K`}</kbd> jump
+          </span>
+          <span>
+            <kbd className="kbd">/</kbd> ask
+          </span>
+          <button type="button" className="link-btn" onClick={toggleTheme}>
+            Switch theme
+          </button>
+        </p>
+      </div>
+    </footer>
+  )
 }
 
-export default function App() {
+export default function App({ route }: { route: string }) {
+  const project = projectFor(route)
   return (
     <>
       <a className="skip" href="#main">
         Skip to content
       </a>
-
-      <div className="page">
-        <header className="bar">
-          <h1 className="name">{PROFILE.name}</h1>
-          <nav aria-label="Sections">
-            <ul className="nav">
-              <li>
-                <a href="#now">Now</a>
-              </li>
-              <li>
-                <a href="#work">Work</a>
-              </li>
-              <li>
-                <a href="#writing">Writing</a>
-              </li>
-            </ul>
-          </nav>
-        </header>
-
-        <main id="main">
-          <section className="row intro" aria-label="Introduction">
-            <div className="margin">
-              <img
-                className="photo"
-                src={PROFILE.photo}
-                alt={PROFILE.photoAlt}
-                width={320}
-                height={320}
-              />
-              <p className="mono meta">{PROFILE.location}</p>
-            </div>
-            <div className="body">
-              {PROFILE.intro.map((paragraph, i) => (
-                <p key={i}>
-                  <Spans items={paragraph} />
-                </p>
-              ))}
-            </div>
-          </section>
-
-          <section id="now" aria-labelledby="now-h">
-            <div className="row head">
-              <p className="margin mono meta">
-                Updated{' '}
-                <time dateTime={PROFILE.updatedIso}>{PROFILE.updated}</time>
-              </p>
-              <h2 id="now-h" className="body">
-                Now
-              </h2>
-            </div>
-            <ol className="log">
-              {NOW.map((entry, i) => (
-                <li key={i} className="row">
-                  <p className="margin mono meta">
-                    <time dateTime={entry.iso}>{entry.date}</time>
-                    <span className="tag">{entry.tag}</span>
-                  </p>
-                  <p className="body">
-                    <Spans items={entry.body} />
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <section id="work" aria-labelledby="work-h">
-            <div className="row head">
-              <span className="margin" aria-hidden="true" />
-              <h2 id="work-h" className="body">
-                Work
-              </h2>
-            </div>
-            <ul className="log">
-              {WORK.map((item) => (
-                <li key={item.name} className="row">
-                  <p className="margin mono meta">
-                    <span className="tag">{item.label}</span>
-                    <span>{item.period}</span>
-                  </p>
-                  <p className="body">
-                    <a href={item.href}>{item.name}</a>
-                    <br />
-                    <span className="sub">{item.body}</span>
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section id="writing" aria-labelledby="writing-h">
-            <div className="row head">
-              <span className="margin" aria-hidden="true" />
-              <h2 id="writing-h" className="body">
-                Writing
-              </h2>
-            </div>
-            <ul className="log">
-              {WRITING.map((note) => (
-                <li key={note.slug} className="row">
-                  <p className="margin mono meta">
-                    <time dateTime={note.date}>{note.date}</time>
-                  </p>
-                  <p className="body">
-                    <a href={`${NOTES_BASE_URL}/${note.slug}`}>{note.title}</a>
-                  </p>
-                </li>
-              ))}
-              <li className="row">
-                <span className="margin" aria-hidden="true" />
-                <p className="body sub">
-                  <a href={NOTES_BASE_URL}>All notes on tiercel.io</a> →
-                </p>
-              </li>
-            </ul>
-          </section>
-
-          <section id="elsewhere" aria-labelledby="elsewhere-h">
-            <div className="row head">
-              <span className="margin" aria-hidden="true" />
-              <h2 id="elsewhere-h" className="body">
-                Elsewhere
-              </h2>
-            </div>
-            <ul className="log">
-              {LINKS.map((link) => (
-                <li key={link.label} className="row">
-                  <p className="margin mono meta">{link.label}</p>
-                  <p className="body">
-                    <a href={link.href}>{displayUrl(link.href)}</a>
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section id="contact" aria-labelledby="contact-h">
-            <div className="row head">
-              <span className="margin" aria-hidden="true" />
-              <h2 id="contact-h" className="body">
-                Contact
-              </h2>
-            </div>
-            <div className="log">
-              <p className="row">
-                <span className="margin mono meta">Email</span>
-                <span className="body">
-                  <a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
-                </span>
-              </p>
-              <p className="row">
-                <span className="margin mono meta">Partner</span>
-                <span className="body">
-                  Want an AI-powered app built?{' '}
-                  <a href="https://tiercel.io">Tiercel partners with companies →</a>
-                </span>
-              </p>
-            </div>
-          </section>
-        </main>
-
-        <footer className="row foot">
-          <span className="margin" aria-hidden="true" />
-          <p className="body mono meta">
-            Set in Newsreader and JetBrains Mono.
-          </p>
-        </footer>
-      </div>
+      <Header route={route} />
+      {project ? <Work project={project} /> : <Home />}
+      <Footer />
+      <Toaster />
     </>
   )
 }

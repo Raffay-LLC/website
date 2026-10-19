@@ -1,11 +1,19 @@
 import { renderToString } from 'react-dom/server'
 import App from './App'
-import { jsonLdScript } from './seo'
+import { buildKnowledge } from './knowledge'
+import { ROUTES } from './routes'
+import { headTags, jsonLdScripts } from './seo'
+import { SITE } from './content'
 
-/** Build-time only: called by scripts/prerender.mjs. */
-export function render() {
+export { ROUTES, SITE, buildKnowledge }
+
+/** Build-time only: called by scripts/prerender.mjs, once per route. */
+export function render(route: string) {
+  const { title, meta } = headTags(route)
   return {
-    html: renderToString(<App />),
-    jsonLd: jsonLdScript(),
+    html: renderToString(<App route={route} />),
+    title,
+    meta,
+    jsonLd: jsonLdScripts(route),
   }
 }

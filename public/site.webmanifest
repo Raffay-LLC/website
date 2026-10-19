@@ -1,11 +1,11 @@
 {
   "name": "Raffay Sajjad",
   "short_name": "Raffay Sajjad",
-  "description": "Software engineer and founder in Lahore, Pakistan.",
+  "description": "Staff product engineer and founder of Tiercel in Lahore, Pakistan. I ship AI products end to end.",
   "start_url": "/",
   "display": "browser",
-  "background_color": "#f7f5f0",
-  "theme_color": "#f7f5f0",
+  "background_color": "#f4f1ea",
+  "theme_color": "#f4f1ea",
   "icons": [
     {
       "src": "/favicon.svg",
