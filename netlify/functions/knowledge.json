@@ -1,0 +1,409 @@
+{
+  "generatedFrom": "src/content.ts",
+  "person": {
+    "name": "Raffay Sajjad",
+    "title": "Staff product engineer",
+    "summary": "The model call is the easy part. I build the rest. I ship AI products end to end: the app, the server, the model calls, the billing and the App Store listing. Seven years building for other companies, now my own through Tiercel.",
+    "location": "Lahore, Pakistan",
+    "email": "contact@raffaysajjad.com",
+    "website": "https://raffaysajjad.com",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/RaffaySajjad"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/raffay-sajjad"
+      },
+      {
+        "label": "X",
+        "url": "https://x.com/raffaysajjad"
+      }
+    ]
+  },
+  "company": {
+    "name": "Tiercel",
+    "url": "https://tiercel.io",
+    "about": "An independent software company that builds AI-powered apps and partners with companies to build theirs.",
+    "partnerWork": "Tiercel is an independent software company. Besides its own apps, it partners with companies that want to build theirs.",
+    "partnerShapes": [
+      {
+        "title": "Zero to App Store",
+        "body": "An AI-powered app built end to end, from the first commit to the store listing."
+      },
+      {
+        "title": "AI feature in your product",
+        "body": "Voice, vision or an assistant added to an app you already run, with the guardrails to ship it."
+      },
+      {
+        "title": "A staff-level hand on your team",
+        "body": "Architecture, performance and technical leadership on a web or mobile platform."
+      }
+    ]
+  },
+  "projects": [
+    {
+      "name": "Finly: Budget Expense Tracker",
+      "kind": "product",
+      "period": "2025–now",
+      "role": "Built end to end",
+      "status": "Live on iPhone and Android",
+      "platforms": "iPhone, Android",
+      "link": "https://heyfinly.com",
+      "page": "https://raffaysajjad.com/work/finly",
+      "tagline": "An AI expense tracker for iPhone and Android.",
+      "problem": [
+        "Expense trackers ask for a lot of typing or for your bank login, and people stop logging after a week. Finly makes entry nearly free: say it, photograph it, or import a statement, then confirm."
+      ],
+      "built": [
+        "Voice entry, receipt scanning and PDF or CSV statement import, each turning raw input into draft transactions.",
+        "Receipt scanning is one vision-model call that returns a JSON array of drafts, matched to the user’s own categories. Nothing saves until the user confirms.",
+        "A tool-calling assistant that confirms before it writes. The model proposes; the server holds the action behind a short-lived token until the user taps confirm.",
+        "A React Native and Expo app for iPhone and Android, talking to a Node and Express API on Postgres with Prisma.",
+        "Statement imports run as background jobs on Redis and BullMQ, so a big PDF never blocks the app.",
+        "OpenAI and Anthropic models behind the API, with Whisper for voice.",
+        "A self-hosted over-the-air update server on Railway, so fixes reach users without a store review."
+      ],
+      "stack": [
+        "React Native",
+        "Expo",
+        "Node",
+        "Express",
+        "Postgres",
+        "Prisma",
+        "Redis",
+        "BullMQ",
+        "OpenAI",
+        "Anthropic",
+        "Railway"
+      ],
+      "outcomes": [
+        "2 platforms, one codebase",
+        "3 ways in: voice, receipt, statement",
+        "Organic growth since paid ads paused"
+      ]
+    },
+    {
+      "name": "Investolio",
+      "kind": "product",
+      "period": "2026–now",
+      "role": "Built end to end",
+      "status": "In beta",
+      "platforms": "iOS, Android, web",
+      "link": "https://tiercel.io/products/investolio",
+      "page": "https://raffaysajjad.com/work/investolio",
+      "tagline": "A dividend and portfolio tracker for iOS, Android and web.",
+      "problem": [
+        "Dividend investors keep asking what they will be paid, and when. The answer lives across brokerage statements and spreadsheets, and it needs prices from a data feed that is not free."
+      ],
+      "built": [
+        "An Interactive Brokers sync, so a portfolio arrives without retyping a position.",
+        "Offline-first: the app reads from an on-device cache, opens with no connection and syncs in the background.",
+        "Its own keyless market-data service: prices, dividends and FX from free public sources, each with an ordered fallback, stored in Postgres.",
+        "Dividends merged from two sources, with a tolerance so a one-day ex-date disagreement is not counted twice.",
+        "A dividend calendar, income forecasts and a per-holding dividend rating.",
+        "One Expo and React Native codebase for iOS, Android and web."
+      ],
+      "stack": [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "Node",
+        "Postgres"
+      ],
+      "outcomes": [
+        "3 platforms, one codebase",
+        "0 paid market-data APIs",
+        "Beta in testing now"
+      ]
+    },
+    {
+      "name": "Reelife",
+      "kind": "product",
+      "period": "Jun 2023–now",
+      "role": "Side project, built end to end",
+      "status": "On the Shopify App Store",
+      "platforms": "Shopify",
+      "link": "https://apps.shopify.com/reelife",
+      "page": "https://raffaysajjad.com/work/reelife",
+      "tagline": "A Shopify SaaS app, live on the Shopify App Store.",
+      "problem": [
+        "Shopify merchants need software that installs from the App Store, bills through Shopify and shows them what is happening as it happens."
+      ],
+      "built": [
+        "A Remix frontend embedded in the Shopify admin.",
+        "Nest.js microservices behind it, packaged with Docker and run on Kubernetes.",
+        "Hosting on AWS.",
+        "Subscriptions through the Shopify Billing API.",
+        "A real-time dashboard for merchants."
+      ],
+      "stack": [
+        "Remix",
+        "Nest.js",
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "Shopify Billing API"
+      ],
+      "outcomes": [
+        "Merchants use it on Shopify",
+        "2023 live since June",
+        "Billing through the Shopify Billing API"
+      ]
+    },
+    {
+      "name": "Trafilea",
+      "kind": "employer",
+      "period": "Jul 2022–now",
+      "role": "Staff Frontend Engineer & Tech Lead",
+      "status": "Current role",
+      "platforms": "Web, remote from Montevideo, UY",
+      "link": "https://trafilea.com",
+      "page": "https://raffaysajjad.com/work/trafilea",
+      "tagline": "Tech lead on a flagship e-commerce platform.",
+      "problem": [
+        "A flagship e-commerce platform where every extra second of load time and every sluggish interaction costs sales, and a team that needed a clear technical direction."
+      ],
+      "built": [
+        "Led a team of four engineers in the Business Support Division as Tech Lead.",
+        "React and Next.js performance work across the platform: render paths, bundles and interaction cost.",
+        "REST and GraphQL integration between the storefront and the services behind it.",
+        "Migrated applications to AWS EC2 with Docker.",
+        "Mentored engineers on the team."
+      ],
+      "stack": [
+        "React",
+        "Next.js",
+        "GraphQL",
+        "REST",
+        "AWS EC2",
+        "Docker"
+      ],
+      "outcomes": [
+        "+15% UI responsiveness",
+        "−10% load times",
+        "4 person team led"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "organization": "Tiercel",
+      "role": "Founder",
+      "place": "Lahore, Pakistan",
+      "period": "2026–now",
+      "impact": "An independent software company that builds AI-powered apps, and partners with companies to build theirs.",
+      "stack": [
+        "React Native",
+        "Expo",
+        "Node",
+        "Postgres",
+        "LLM APIs"
+      ]
+    },
+    {
+      "organization": "Trafilea Inc.",
+      "role": "Staff Frontend Engineer & Tech Lead",
+      "place": "Montevideo, UY (remote)",
+      "period": "Jul 2022–now",
+      "impact": "Led a team of four on a flagship e-commerce platform. +15% UI responsiveness, −10% load times, apps moved to AWS EC2 with Docker.",
+      "stack": [
+        "React",
+        "Next.js",
+        "GraphQL",
+        "AWS",
+        "Docker"
+      ]
+    },
+    {
+      "organization": "Reelife",
+      "role": "Founder, side project",
+      "place": "Shopify App Store",
+      "period": "Jun 2023–now",
+      "impact": "A Shopify SaaS app with Shopify Billing and a real-time merchant dashboard, used by Shopify merchants.",
+      "stack": [
+        "Remix",
+        "Nest.js",
+        "AWS",
+        "Kubernetes"
+      ]
+    },
+    {
+      "organization": "Planto Ltd.",
+      "role": "Senior Frontend Engineer",
+      "place": "Hong Kong SAR",
+      "period": "Apr–Oct 2022",
+      "impact": "On a financial management app: +20% UI responsiveness, a class-to-hooks migration and a testing strategy.",
+      "stack": [
+        "React",
+        "React Native"
+      ]
+    },
+    {
+      "organization": "Netsol Technologies",
+      "role": "Senior Software Engineer",
+      "place": "Lahore, Pakistan",
+      "period": "Jan 2021–Apr 2022",
+      "impact": "+30% interface responsiveness, client delivery and code reviews.",
+      "stack": [
+        "React",
+        "Next.js"
+      ]
+    },
+    {
+      "organization": "Power Information Technology Company",
+      "role": "Software Engineer",
+      "place": "Lahore, Pakistan",
+      "period": "Apr 2019–Dec 2020",
+      "impact": "B2B apps, and functional requirement specification (FRS) documents for 10+ projects.",
+      "stack": []
+    }
+  ],
+  "education": [
+    {
+      "credential": "MS Computer Science",
+      "institution": "LUMS",
+      "year": "2022",
+      "note": null
+    },
+    {
+      "credential": "BS Computer Engineering",
+      "institution": "FAST-NUCES",
+      "year": "2020",
+      "note": "Bronze Medalist, Cum Laude"
+    },
+    {
+      "credential": "React certificate",
+      "institution": "Toggl",
+      "year": "2024",
+      "note": null
+    }
+  ],
+  "skills": [
+    {
+      "area": "Product",
+      "items": [
+        "React",
+        "Next.js",
+        "Remix",
+        "React Native",
+        "Expo",
+        "TypeScript"
+      ]
+    },
+    {
+      "area": "Server and infra",
+      "items": [
+        "Node",
+        "Nest",
+        "Express",
+        "GraphQL",
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "CI/CD"
+      ]
+    },
+    {
+      "area": "AI in production",
+      "items": [
+        "OpenAI and Anthropic tool calling",
+        "Vision extraction",
+        "Whisper"
+      ]
+    },
+    {
+      "area": "Practice",
+      "items": [
+        "Cursor",
+        "Claude Code",
+        "Codex",
+        "Team leadership"
+      ]
+    }
+  ],
+  "now": [
+    {
+      "date": "Oct 2026",
+      "doing": "building",
+      "text": "Investolio, the dividend and portfolio tracker, which is in beta, and AI-powered apps for partner companies through Tiercel."
+    },
+    {
+      "date": "Oct 2026",
+      "doing": "shipping",
+      "text": "Finly, the AI expense tracker for iPhone and Android, which is growing organically since I paused paid ads."
+    },
+    {
+      "date": "Oct 2026",
+      "doing": "writing",
+      "text": "Four field notes written from the Finly and Investolio code, on receipt scanning, confirm-before-write assistants, a keyless market-data service and self-hosted OTA updates. They are on the Tiercel journal."
+    }
+  ],
+  "writing": [
+    {
+      "title": "Receipt scanning in production",
+      "date": "2026-10-19",
+      "url": "https://tiercel.io/notes/receipt-scanning-in-production"
+    },
+    {
+      "title": "Confirm before you write: a tool-calling assistant for money",
+      "date": "2026-10-19",
+      "url": "https://tiercel.io/notes/confirm-before-you-write-a-tool-calling-assistant-for-money"
+    },
+    {
+      "title": "A market-data service with no API keys",
+      "date": "2026-10-19",
+      "url": "https://tiercel.io/notes/a-market-data-service-with-no-api-keys"
+    },
+    {
+      "title": "Shipping an Expo app with self-hosted OTA updates",
+      "date": "2026-10-19",
+      "url": "https://tiercel.io/notes/shipping-an-expo-app-with-self-hosted-ota-updates"
+    },
+    {
+      "title": "Decision models vs chat models in a real workflow.",
+      "date": "2026-09-18",
+      "url": "https://tiercel.io/notes/decision-models-vs-chat-models-in-workflows"
+    },
+    {
+      "title": "Local models when data cannot leave.",
+      "date": "2026-01-20",
+      "url": "https://tiercel.io/notes/local-models-when-data-cannot-leave"
+    }
+  ],
+  "prewrittenAnswers": [
+    {
+      "question": "What has Raffay shipped?",
+      "answer": "Three products of his own. Finly: Budget Expense Tracker (2025 to now) is an AI expense tracker for iPhone and Android with voice entry, receipt scanning, PDF and CSV statement import and an assistant that confirms before it writes. Investolio (2026 to now, in beta) is a dividend and portfolio tracker for iOS, Android and web. Reelife (June 2023 to now) is a Shopify SaaS app used by Shopify merchants. Before that he shipped for other companies: Trafilea, Planto and Netsol."
+    },
+    {
+      "question": "What’s his experience with AI in production?",
+      "answer": "Finly runs LLM features in production: voice entry with Whisper, receipt scanning with a vision model that returns draft transactions, PDF and CSV statement import, and a tool-calling assistant that confirms before it writes. It uses OpenAI and Anthropic models behind a Node API. He also writes up what he learns as field notes on the Tiercel journal, such as receipt scanning in production and confirm-before-you-write assistants."
+    },
+    {
+      "question": "Is he open to partner work?",
+      "answer": "Yes. Tiercel, the company he founded, partners with companies that want to build their own AI-powered apps. The way to start is an email to contact@raffaysajjad.com."
+    },
+    {
+      "question": "What stack does he use?",
+      "answer": "On the front end: React, Next.js, Remix, React Native with Expo, and TypeScript. On the back end: Node, Nest and Express, GraphQL, Postgres with Prisma, and Redis with BullMQ. For infrastructure: AWS, Docker, Kubernetes, CI/CD and Railway. For AI: OpenAI and Anthropic tool calling, vision extraction and Whisper. He also builds with Cursor, Claude Code and Codex."
+    },
+    {
+      "question": "Where has he worked?",
+      "answer": "Trafilea (July 2022 to now, remote from Montevideo) as Staff Frontend Engineer and Tech Lead, leading a team of four. Planto Ltd. in Hong Kong SAR (April to October 2022) as Senior Frontend Engineer. Netsol Technologies in Lahore (January 2021 to April 2022). Power Information Technology Company in Lahore (April 2019 to December 2020) as a Software Engineer. Since 2026 he is also the founder of Tiercel."
+    },
+    {
+      "question": "Where did he study?",
+      "answer": "An MS in Computer Science from LUMS (2022), and a BS in Computer Engineering from FAST-NUCES (2020), where he was a Bronze Medalist and graduated Cum Laude. He also holds a Toggl React certificate (2024)."
+    },
+    {
+      "question": "Where is he based?",
+      "answer": "Lahore, Pakistan (Pakistan Standard Time, UTC+5). He works remotely with a team whose home base is Montevideo, Uruguay."
+    },
+    {
+      "question": "How can I contact him?",
+      "answer": "Email contact@raffaysajjad.com. He is also on GitHub (RaffaySajjad), LinkedIn (raffay-sajjad) and X (@raffaysajjad)."
+    }
+  ]
+}
