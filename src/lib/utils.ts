@@ -41,12 +41,15 @@ export function toast(message: string) {
   window.dispatchEvent(new CustomEvent(TOAST_EVENT, { detail: message }))
 }
 
-export async function copyText(text: string, message: string) {
+/** Copies to the clipboard. Resolves true on success; `silent` skips the toast when the caller shows its own feedback. */
+export async function copyText(text: string, message: string, { silent = false } = {}) {
   try {
     await navigator.clipboard.writeText(text)
-    toast(message)
+    if (!silent) toast(message)
+    return true
   } catch {
     toast(`Copy failed. It is ${text}`)
+    return false
   }
 }
 

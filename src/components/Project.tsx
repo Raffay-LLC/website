@@ -1,7 +1,10 @@
-import type { CSSProperties } from 'react'
+import { useEffect, useRef, type CSSProperties } from 'react'
+import { animate, stagger } from 'motion'
 import type { Project } from '../content'
 import { CLIPS } from '../clips'
-import { Arrow } from './Bits'
+import { Arrow, CountUp } from './Bits'
+import { onceInView, settle } from '../lib/fx'
+import { prefersReducedMotion } from '../lib/utils'
 import { themeVars } from '../lib/project'
 import { Device } from './Device'
 
@@ -28,8 +31,30 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   const hasDevices = project.devices.length > 0
   const flip = hasDevices && project.slug !== 'finly'
   const highlights = project.built.slice(0, 3)
+  const ref = useRef<HTMLElement>(null)
+
+  // The phones spring up into place the first time the card comes into view.
+  useEffect(() => {
+    const el = ref.current
+    if (!el || prefersReducedMotion()) return
+    const devs = Array.from(el.querySelectorAll<HTMLElement>('.card-media .dev'))
+    if (!devs.length) return
+    return onceInView(
+      el,
+      () => {
+        animate(
+          devs,
+          { y: [56, 0], rotate: [3.5, 0], opacity: [0, 1] },
+          { type: 'spring', stiffness: 130, damping: 19, mass: 1, delay: stagger(0.12, { startDelay: 0.18 }) },
+        ).finished.then(() => settle(devs))
+      },
+      '0px 0px -22% 0px',
+    )
+  }, [])
+
   return (
     <article
+      ref={ref}
       className={`card ${hasDevices ? 'card-dev' : 'card-type'}${flip ? ' is-flip' : ''} card-${project.slug}`}
       style={themeVars(project)}
     >
@@ -59,7 +84,9 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           <dl className="card-outcomes">
             {project.outcomes.map((o) => (
               <div key={o.label}>
-                <dt>{o.figure}</dt>
+                <dt>
+                  <CountUp value={o.figure} />
+                </dt>
                 <dd>{o.label}</dd>
               </div>
             ))}
@@ -80,6 +107,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           <DeviceStack project={project} />
         </div>
       ) : null}
+      <span className="card-dim" aria-hidden="true" />
     </article>
   )
 }

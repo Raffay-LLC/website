@@ -5,7 +5,7 @@
 //   - writes dist/sitemap.xml from the same route list;
 //   - writes netlify/functions/knowledge.json, the content the "Ask about my
 //     work" function is grounded in.
-import { readFile, writeFile, mkdir, rm } from 'node:fs/promises'
+import { readFile, writeFile, mkdir, rm, readdir } from 'node:fs/promises'
 import { pathToFileURL } from 'node:url'
 import path from 'node:path'
 
@@ -24,11 +24,19 @@ for (const marker of ['<div id="root"></div>', '<!--jsonld-->', '<!--meta-->', '
   }
 }
 
+// Preload the latin web fonts the first screen uses, so the swap from the
+// fallback face lands before first paint and the headline does not reflow.
+const assets = await readdir(path.join(dist, 'assets'))
+const preload = assets
+  .filter((f) => /^(fraunces-latin-opsz-(normal|italic)|geist-latin-wght-normal|geist-mono-latin-wght-normal)-.*\.woff2$/.test(f))
+  .map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin>`)
+  .join('\n    ')
+
 for (const route of ROUTES) {
   const { html, title, meta, jsonLd } = render(route)
   const page = template
     .replace('<title>Raffay Sajjad</title>', () => `<title>${title.replace(/&/g, '&amp;')}</title>`)
-    .replace('<!--meta-->', () => meta)
+    .replace('<!--meta-->', () => `${meta}\n    ${preload}`)
     .replace('<!--jsonld-->', () => jsonLd)
     .replace('<div id="root"></div>', () => `<div id="root">${html}</div>`)
 

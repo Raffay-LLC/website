@@ -20,6 +20,16 @@
       } catch (e) {}
     </script>
 
+    <script>
+      // Motion is progressive enhancement. `js` unlocks the hidden "before"
+      // states in CSS; without it (no JavaScript, or the bundle never mounts)
+      // everything stays visible. A mounted app sets data-mounted at once.
+      document.documentElement.classList.add('js')
+      setTimeout(function () {
+        if (!document.documentElement.hasAttribute('data-mounted')) document.documentElement.classList.remove('js')
+      }, 6000)
+    </script>
+
     <!--jsonld-->
   </head>
   <body>

@@ -8,6 +8,7 @@ import './index.css'
 import App from './App.tsx'
 import { normalizeRoute } from './routes.ts'
 
+document.documentElement.setAttribute('data-mounted', '')
 const root = document.getElementById('root')!
 const app = (
   <StrictMode>

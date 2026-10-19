@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { animate } from 'motion'
 import { LINKS, PROFILE, PROJECTS, SITE, WRITING } from '../content'
-import { copyText, currentTheme, goTo, toggleTheme, useModKey } from '../lib/utils'
+import { copyText, currentTheme, goTo, prefersReducedMotion, toggleTheme, useModKey } from '../lib/utils'
 
 type Item = {
   id: string
@@ -19,6 +20,9 @@ function isTyping(target: EventTarget | null) {
 /** Header button plus the ⌘K dialog. Also owns the global shortcuts. */
 export function Palette({ route }: { route: string }) {
   const [open, setOpen] = useState(false)
+  // The dialog stays mounted while it plays its exit.
+  const [mounted, setMounted] = useState(false)
+  if (open && !mounted) setMounted(true)
   const mod = useModKey()
 
   useEffect(() => {
@@ -53,12 +57,24 @@ export function Palette({ route }: { route: string }) {
           {mod === '⌘' ? '' : ' '}K
         </kbd>
       </button>
-      {open ? <PaletteDialog route={route} onClose={() => setOpen(false)} /> : null}
+      {mounted ? <PaletteDialog route={route} open={open} onClose={() => setOpen(false)} onExited={() => setMounted(false)} /> : null}
     </>
   )
 }
 
-function PaletteDialog({ route, onClose }: { route: string; onClose: () => void }) {
+const IN = { type: 'spring', stiffness: 520, damping: 33, mass: 0.8 } as const
+
+function PaletteDialog({ route, open, onClose, onExited }: { route: string; open: boolean; onClose: () => void; onExited: () => void }) {
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const runAfter = useRef<(() => void) | null>(null)
+  const finish = () => {
+    onExited()
+    const run = runAfter.current
+    runAfter.current = null
+    // Let focus return to where it was, then act.
+    if (run) window.setTimeout(run, 0)
+  }
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -142,11 +158,35 @@ function PaletteDialog({ route, onClose }: { route: string; onClose: () => void 
     if (activeId) document.getElementById(`pal-${activeId}`)?.scrollIntoView({ block: 'nearest' })
   }, [activeId])
 
+  // Spring in on open, a quick scale and fade out on close.
+  useLayoutEffect(() => {
+    const overlay = overlayRef.current
+    const panel = panelRef.current
+    if (!overlay || !panel) return
+    if (prefersReducedMotion()) {
+      if (!open) finish()
+      return
+    }
+    if (open) {
+      const a = [
+        animate(overlay, { opacity: [0, 1] }, { duration: 0.18, ease: 'easeOut' }),
+        animate(panel, { opacity: [0, 1], scale: [0.95, 1], y: [-14, 0] }, { ...IN, opacity: { duration: 0.14 } }),
+      ]
+      return () => a.forEach((x) => x.stop())
+    }
+    const a = [
+      animate(overlay, { opacity: 0 }, { duration: 0.14, ease: 'easeIn' }),
+      animate(panel, { opacity: 0, scale: 0.97, y: -8 }, { duration: 0.14, ease: [0.4, 0, 1, 1] }),
+    ]
+    a[0].finished.then(finish, () => {})
+    return () => a.forEach((x) => x.stop())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open])
+
   function choose(item: Item | undefined) {
     if (!item) return
+    runAfter.current = item.run
     onClose()
-    // Let focus return first, then act.
-    window.setTimeout(item.run, 0)
   }
 
   function onKeyDown(e: React.KeyboardEvent) {
@@ -171,8 +211,9 @@ function PaletteDialog({ route, onClose }: { route: string; onClose: () => void 
 
   let lastGroup = ''
   return (
-    <div className="pal-overlay" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <div ref={overlayRef} className="pal-overlay" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
       <div
+        ref={panelRef}
         className="pal"
         role="dialog"
         aria-modal="true"

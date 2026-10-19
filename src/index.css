@@ -295,6 +295,8 @@ button {
 
 .clock {
   display: none;
+  min-width: 15.5ch;
+  text-align: right;
   color: var(--ink-2);
   white-space: nowrap;
 }
@@ -508,14 +510,13 @@ button {
   text-decoration: none;
 }
 
+.stage-rise,
 .stage-device {
   display: block;
-  transform: translate3d(calc(var(--mx, 0) * -9px), calc(var(--my, 0) * -6px), 0);
-  transition: transform 0.35s var(--ease);
 }
 
-.stage:nth-child(2) .stage-device {
-  transform: translate3d(calc(var(--mx, 0) * 9px), calc(var(--my, 0) * 6px), 0);
+.stage-device {
+  will-change: transform;
 }
 
 .motion-toggle {
@@ -994,15 +995,25 @@ video::-webkit-media-controls-start-playback-button {
   gap: clamp(16px, 2vw, 24px);
 }
 
+.slot {
+  display: grid;
+  gap: clamp(16px, 2vw, 24px);
+}
+
 @media (min-width: 900px) {
-  .cards {
+  .slot-pair {
     grid-template-columns: 1fr 1fr;
   }
+}
 
-  .cards > :nth-child(1),
-  .cards > :nth-child(2) {
-    grid-column: 1 / -1;
-  }
+/* A thin sheet over the card that darkens it as the next card slides over. */
+.card-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: #0b0b09;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .card-wrap {
@@ -1205,58 +1216,67 @@ video::-webkit-media-controls-start-playback-button {
 /* Anatomy                                                             */
 /* ------------------------------------------------------------------ */
 
+.anatomy-wrap {
+  position: relative;
+  padding-left: 30px;
+}
+
+/* The rail the five layers hang from. It draws down as you scroll. */
+.an-rail {
+  position: absolute;
+  left: 4px;
+  top: 14px;
+  bottom: 14px;
+  width: 1px;
+  background: var(--rule);
+}
+
+.an-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: top;
+}
+
 .anatomy {
   display: grid;
-  border-left: 1px solid var(--ink);
-  margin-left: 4px;
+  gap: 10px;
 }
 
-@media (min-width: 900px) {
-  .anatomy {
-    grid-template-columns: repeat(5, 1fr);
-    border-left: 0;
-    border-top: 1px solid var(--ink);
-    margin-left: 0;
-  }
-}
-
-.anatomy li {
+.an-row {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 4px 20px 26px 28px;
+  display: grid;
+  gap: 4px 28px;
+  padding: 20px 22px 22px;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
 }
 
 @media (min-width: 900px) {
-  .anatomy li {
-    padding: 32px 22px 4px 0;
+  .an-row {
+    grid-template-columns: 3.2rem 9rem minmax(0, 1.1fr) minmax(0, 1.2fr);
+    align-items: baseline;
+    padding: 22px 28px;
   }
 }
 
-.anatomy li::before {
-  content: '';
+.an-dot {
   position: absolute;
-  left: -5px;
-  top: 8px;
+  left: -30px;
+  top: 26px;
   width: 9px;
   height: 9px;
+  margin-left: 0;
   border-radius: 50%;
   background: var(--accent);
-}
-
-@media (min-width: 900px) {
-  .anatomy li::before {
-    left: 0;
-    top: -5px;
-  }
 }
 
 .an-n {
   color: var(--ink-2);
 }
 
-.anatomy strong {
+.an-row strong {
   font-family: var(--display);
   font-size: 1.9rem;
   font-weight: 420;
@@ -1272,18 +1292,39 @@ video::-webkit-media-controls-start-playback-button {
 .an-tech {
   color: var(--ink-2);
   line-height: 1.6;
-  margin-top: 4px;
 }
 
 /* ------------------------------------------------------------------ */
 /* Timeline                                                            */
 /* ------------------------------------------------------------------ */
 
+.timeline-wrap {
+  position: relative;
+  padding-left: 30px;
+}
+
+.tl-rail {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+
+.tl-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: top;
+}
+
 .timeline {
   border-top: 1px solid var(--ink);
 }
 
 .tl {
+  position: relative;
   display: grid;
   gap: 8px 32px;
   padding: 24px 0 26px;
@@ -1294,6 +1335,17 @@ video::-webkit-media-controls-start-playback-button {
   .tl {
     grid-template-columns: 11rem minmax(0, 1fr) minmax(0, 1.5fr);
   }
+}
+
+.tl-dot {
+  position: absolute;
+  left: -30px;
+  top: 30px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--paper);
 }
 
 .tl-when {
@@ -1974,7 +2026,6 @@ video::-webkit-media-controls-start-playback-button {
   align-items: start;
   padding: clamp(48px, 14vh, 140px) 16px 16px;
   background: rgb(10 10 8 / 0.6);
-  animation: fade-in 0.15s var(--ease);
 }
 
 .pal {
@@ -1988,7 +2039,6 @@ video::-webkit-media-controls-start-playback-button {
   border-radius: 10px;
   box-shadow: 0 24px 60px rgb(0 0 0 / 0.35);
   overflow: hidden;
-  animation: pal-in 0.18s var(--ease);
 }
 
 .pal-input {
@@ -2060,19 +2110,6 @@ video::-webkit-media-controls-start-playback-button {
   font-size: 0.7rem;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
-@keyframes pal-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.985);
-  }
-}
-
 /* ------------------------------------------------------------------ */
 /* Toast                                                               */
 /* ------------------------------------------------------------------ */
@@ -2103,20 +2140,360 @@ video::-webkit-media-controls-start-playback-button {
 }
 
 /* ------------------------------------------------------------------ */
-/* Reveal                                                              */
+/* Motion                                                              */
 /* ------------------------------------------------------------------ */
 
-.rv.rv-wait {
-  opacity: 0;
-  transform: translateY(14px);
+/*
+ * Everything here is progressive enhancement. The prerendered HTML has no
+ * hidden state: `html.js` (set by an inline script in index.html) unlocks the
+ * "before" poses below, and only when motion is welcome. Motion (the library)
+ * animates from the pose to the natural state, then `.is-in` retires the pose.
+ */
+
+/* Masked words: a heading's words rise out of line masks. */
+.w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.04em 0.06em 0.18em;
+  margin: -0.04em -0.06em -0.18em;
 }
 
-.rv.rv-wait.rv-in {
+.w > span {
+  display: inline-block;
+}
+
+em .w {
+  padding-inline: 0.12em;
+  margin-inline: -0.12em;
+}
+
+@keyframes word-rise {
+  from {
+    transform: translateY(112%);
+  }
+}
+
+/* "I build the rest." writes in: a wipe left to right while the slant settles. */
+@keyframes word-write {
+  from {
+    transform: translateY(46%) skewX(13deg);
+    clip-path: inset(-10% 100% -10% -10%);
+  }
+  60% {
+    clip-path: inset(-10% -10% -10% -10%);
+  }
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes stage-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes blink-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.5ch;
+  height: 1.05em;
+  margin-left: 3px;
+  vertical-align: -0.17em;
+  background: var(--inv-accent);
+  animation: blink-caret 0.9s steps(1) infinite;
+}
+
+.roll-slot {
+  position: relative;
+  display: inline-block;
+  white-space: pre;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.roll-prev {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.copy-btn {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.copy-btn.is-done {
+  color: var(--inv-ink);
+}
+
+.copy-check {
+  align-self: center;
+  stroke-dasharray: 1;
+  animation: check-draw 0.4s var(--ease) both;
+}
+
+.msg {
+  animation: msg-in 0.4s var(--ease) both;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero: plays at first paint, no JavaScript needed. */
+  .hero-h1 .w > span {
+    animation: word-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(140ms + var(--k, 0) * 60ms);
+  }
+
+  .hero-h1 .hero-em .w > span {
+    animation: word-write 1.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(340ms + var(--k, 0) * 90ms);
+  }
+
+  .hero-fade {
+    animation: fade-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--t, 0ms);
+  }
+
+  .stage-field {
+    animation: stage-in 0.7s ease-out both;
+    animation-delay: calc(300ms + var(--n, 0) * 140ms);
+  }
+
+  .stage:nth-child(2) .stage-field {
+    --n: 1;
+  }
+
+  /* The phones wait below their colour field until Motion springs them up. */
+  html.js .stage-rise:not(.is-in) {
+    transform: translateY(88%) rotate(6deg);
+  }
+
+  html.js .stage-rise[data-dir='-1']:not(.is-in) {
+    transform: translateY(88%) rotate(-6deg);
+  }
+
+  /* Scroll reveals. */
+  html.js .rv:not(.rv-stagger):not(.is-in) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  html.js .rv-stagger:not(.is-in) > * {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  html.js .rw:not(.is-in) .w > span {
+    transform: translateY(112%);
+  }
+
+  html.js .card-media .dev:not(.is-in) {
+    opacity: 0;
+    transform: translateY(56px) rotate(3.5deg);
+  }
+
+  html.js .an-dot:not(.is-in),
+  html.js .tl-dot:not(.is-in) {
+    transform: scale(0);
+  }
+
+  /* The sticky deck of case studies. Needs room: wide and tall windows only. */
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 900px) and (min-height: 700px) {
+  .cards {
+    display: block;
+  }
+
+  .slot {
+    position: sticky;
+    top: min(calc(78px + var(--i, 0) * 14px), calc(100svh - var(--h, 0px) - 24px));
+    padding-bottom: 9vh;
+  }
+
+  .slot:last-child {
+    padding-bottom: 0;
+  }
+
+  .slot + .slot {
+    margin-top: clamp(16px, 2vw, 24px);
+  }
+
+  .slot .card {
+    transform-origin: 50% 0;
+    will-change: transform;
+  }
+}
+
+/* Chips and controls: small, springy feedback. */
+.chip {
+  transition:
+    background-color 0.2s var(--ease),
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.chip:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.askbar:active {
+  transform: scale(0.98);
+}
+
+.btn-link .arrow,
+.tl-links .arrow,
+.socials .arrow,
+.more .arrow,
+.contact-link .arrow {
+  transition: transform 0.3s var(--ease);
+}
+
+.btn-link:hover .arrow,
+.tl-links a:hover .arrow,
+.socials a:hover .arrow,
+.more a:hover .arrow,
+.contact-link:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* Underlines that draw: a hairline sweeps in from the left on hover and out to the right on leave. */
+.nav a,
+.btn-link,
+.socials a,
+.tl-links a,
+.more a,
+.card-ext {
+  position: relative;
+  text-decoration: none;
+}
+
+.nav a::after,
+.btn-link::after,
+.socials a::after,
+.tl-links a::after,
+.more a::after,
+.card-ext::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.05em;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s var(--ease);
+}
+
+.btn-link::after {
+  bottom: calc(10px + 0.08em);
+}
+
+.nav a::after {
+  bottom: calc(8px + 0.08em);
+}
+
+.nav a:hover::after,
+.btn-link:hover::after,
+.socials a:hover::after,
+.tl-links a:hover::after,
+.more a:hover::after,
+.card-ext:hover::after,
+.nav a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav a:hover {
+  text-decoration: none;
+}
+
+/* Writing: the row slides, an arrow arrives, a rule draws under it. */
+.writing a {
+  position: relative;
+  justify-content: flex-start;
+}
+
+.writing .writing-title {
+  flex: 1;
+  transition: transform 0.45s var(--ease);
+}
+
+.writing .arrow {
+  opacity: 0;
+  transform: translate(-10px, 4px);
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.45s var(--ease);
+}
+
+.writing a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.55s var(--ease);
+}
+
+.writing a:hover .writing-title,
+.writing a:focus-visible .writing-title {
+  transform: translateX(10px);
+}
+
+.writing a:hover .arrow,
+.writing a:focus-visible .arrow {
   opacity: 1;
   transform: none;
-  transition:
-    opacity 0.6s var(--ease) var(--d, 0ms),
-    transform 0.6s var(--ease) var(--d, 0ms);
+}
+
+.writing a:hover::after,
+.writing a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.writing a:hover span {
+  text-decoration: none;
+}
+
+.ledger a strong {
+  transition: transform 0.45s var(--ease);
+}
+
+.ledger a:hover strong {
+  transform: translateX(6px);
+  text-decoration: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2126,10 +2503,5 @@ video::-webkit-media-controls-start-playback-button {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
-  }
-
-  .rv.rv-wait {
-    opacity: 1;
-    transform: none;
   }
 }
