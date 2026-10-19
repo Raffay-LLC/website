@@ -17,7 +17,6 @@ export function DeviceStack({ project, eager = false }: { project: Project; eage
           <div className="dev-in">
             <Device kind={d.kind} clip={CLIPS[d.clip]} eager={eager} />
           </div>
-          <figcaption className="dev-cap mono">{CLIPS[d.clip].caption}</figcaption>
         </figure>
       ))}
     </div>
@@ -56,14 +55,16 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             ))}
           </ul>
         ) : null}
-        <dl className="card-outcomes">
-          {project.outcomes.map((o) => (
-            <div key={o.label}>
-              <dt>{o.figure}</dt>
-              <dd>{o.label}</dd>
-            </div>
-          ))}
-        </dl>
+        {project.outcomes.length ? (
+          <dl className="card-outcomes">
+            {project.outcomes.map((o) => (
+              <div key={o.label}>
+                <dt>{o.figure}</dt>
+                <dd>{o.label}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
         <p className="card-stack mono">{project.stack.slice(0, 6).join(' · ')}</p>
         <p className="card-actions">
           <span className="card-more">

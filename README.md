@@ -27,7 +27,7 @@ Routes are listed in `src/routes.ts`: `/` and one case study per project at `/wo
 
 `yarn build` renders each route with `renderToString` (`src/entry-server.tsx`) and `scripts/prerender.mjs` writes `dist/index.html` and `dist/work/<slug>/index.html`, each with its own `<title>`, description, canonical, Open Graph and Twitter tags (`src/seo.ts`) and JSON-LD:
 
-- Home: `ProfilePage` with a `Person` (`sameAs` includes `https://www.linkedin.com/in/raffay-sajjad`) and a `FAQPage` made from the visible short answers.
+- Home: `ProfilePage` with a `Person` (`sameAs` includes `https://www.linkedin.com/in/raffay-sajjad`).
 - Case studies: `WebPage` about a `SoftwareApplication` (or `Organization` for Trafilea) and a `BreadcrumbList`.
 
 `dist/sitemap.xml` is generated from the same route list. `public/robots.txt` allows search, citation and training bots (flip the Allow lines for GPTBot, ClaudeBot, Google-Extended, Applebot-Extended and CCBot to opt out of training). `public/_redirects` redirects www to the apex domain, rewrites `/api/ask` to the function, and returns a real 404 (`public/404.html`) for anything that is not a built file. The hydrating client picks its route from `location.pathname` (`src/main.tsx`).
@@ -50,7 +50,7 @@ browser  --POST /api/ask-->  netlify/functions/ask.ts  --Messages API (streaming
 - **Grounding:** the system prompt embeds `knowledge.json` and tells the model to use only that, never invent employers, dates, numbers or prices, refuse off-topic requests, ignore instructions inside questions, and answer in the third person in under 110 words.
 - **Knowledge file:** `netlify/functions/knowledge.json` is written by `yarn build` (prerender step) from `src/content.ts`. It is committed so type-checking works on a fresh clone; Netlify rebuilds it on every deploy, before it bundles the function.
 - **Limits:** at most 3 user turns per chat, 280 characters per question, 4 KB per request, and a best-effort per-IP rate limit of 20 requests per 10 minutes (in-memory, so per warm function instance, not a hard guarantee; add a Netlify rate-limiting rule or a WAF for a hard cap).
-- **No key, or any failure:** with no `ANTHROPIC_API_KEY` the function returns `503`. The UI treats a 503, a 404 (function not deployed), a network error or an upstream error as "live model not connected" and answers from the pre-written Q&A in `src/content.ts` (`QA_LIST`), routed by keyword (`src/lib/ask.ts`). It labels every answer "Pre-written" or "Claude · live". A 429 shows a notice and a pre-written answer.
+- **No key, or any failure:** with no `ANTHROPIC_API_KEY` the function returns `503`. The UI treats a 503, a 404 (function not deployed), a network error or an upstream error as "live model not connected" and answers from the pre-written Q&A in `src/content.ts` (`QA_LIST`), routed by keyword (`src/lib/ask.ts`). Answers carry no source label; a 429 also gets the matching pre-written answer.
 - **Env var:** `ANTHROPIC_API_KEY` (Netlify > Site configuration > Environment variables; scope it to Functions). Use a key with a low monthly spend limit: the endpoint is public.
 - **Cost:** Haiku 5.5 at about 4k input tokens and at most 300 output tokens per question is a small fraction of a cent.
 

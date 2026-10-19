@@ -21,10 +21,8 @@ export default function Work({ project }: { project: Project }) {
                 <Arrow dir="left" /> All work
               </a>
             </p>
-            <p className="kicker mono">
-              Case study · {project.kind === 'employer' ? 'Employer' : 'Product'} · {project.period}
-            </p>
-            <h1 className="case-title">{project.name}</h1>
+            <p className="kicker mono">Case study · {project.period}</p>
+            <h1 className="case-title">{project.display}</h1>
             <p className="case-tag">{project.tagline}</p>
             <dl className="case-meta">
               <div>
@@ -54,7 +52,7 @@ export default function Work({ project }: { project: Project }) {
               <DeviceStack project={project} eager />
               <MotionToggle />
             </div>
-          ) : (
+          ) : project.outcomes.length ? (
             <dl className="case-stats">
               {project.outcomes.map((o) => (
                 <div key={o.label}>
@@ -63,7 +61,7 @@ export default function Work({ project }: { project: Project }) {
                 </div>
               ))}
             </dl>
-          )}
+          ) : null}
         </div>
       </header>
 
@@ -106,7 +104,7 @@ export default function Work({ project }: { project: Project }) {
           </ul>
         </Reveal>
 
-        {hasDevices ? (
+        {hasDevices && project.outcomes.length ? (
           <Reveal as="section" className="case-sec" aria-labelledby="out-h">
             <h2 id="out-h" className="sec-label mono">
               Outcomes
@@ -125,7 +123,7 @@ export default function Work({ project }: { project: Project }) {
         {notes.length ? (
           <Reveal as="section" className="case-sec" aria-labelledby="notes-h">
             <h2 id="notes-h" className="sec-label mono">
-              Field notes from this code
+              Writing on this
             </h2>
             <ul className="notes-list">
               {notes.map((n) => (

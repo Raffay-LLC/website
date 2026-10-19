@@ -5,6 +5,7 @@ import {
   HERO,
   LINKS,
   NOW,
+  ASK,
   PARTNER,
   PROFILE,
   PROJECTS,
@@ -15,7 +16,7 @@ import {
   WRITING,
 } from '../content'
 import { CLIPS } from '../clips'
-import { Ask, ShortAnswers } from '../components/Ask'
+import { Ask } from '../components/Ask'
 import { Arrow, LocalTime, Reveal, Spans } from '../components/Bits'
 import { Device, MotionToggle } from '../components/Device'
 import { copyText, displayUrl, goTo, prefersReducedMotion } from '../lib/utils'
@@ -54,8 +55,8 @@ function Hero() {
   const finly = PROJECTS.find((p) => p.slug === 'finly')!
   const investolio = PROJECTS.find((p) => p.slug === 'investolio')!
   const stage = [
-    { project: finly, kind: 'iphone' as const, clip: CLIPS['finly-voice'], label: 'Finly · voice entry' },
-    { project: investolio, kind: 'iphone' as const, clip: CLIPS['investolio-demo'], label: 'Investolio · dividends' },
+    { project: finly, kind: 'iphone' as const, clip: CLIPS['finly-voice'] },
+    { project: investolio, kind: 'iphone' as const, clip: CLIPS['investolio-demo'] },
   ]
 
   return (
@@ -96,10 +97,6 @@ function Hero() {
               Email me
             </a>
           </p>
-          <p className="hero-credit mono">
-            The first line is the takeaway of a field note I wrote:{' '}
-            <a href={HERO.lineSource.href}>{HERO.lineSource.text}</a>.
-          </p>
         </div>
 
         <div className="hero-stage" role="group" aria-label="Currently shipping: Finly and Investolio running on iPhone">
@@ -117,7 +114,6 @@ function Hero() {
                     <Device kind={s.kind} clip={s.clip} eager />
                   </span>
                 </a>
-                <figcaption className="mono">{s.label}</figcaption>
               </figure>
             ))}
           </div>
@@ -150,21 +146,14 @@ function AskSection() {
     <section id="ask" className="band ask-sec" aria-labelledby="ask-h">
       <div className="wrap ask-grid">
         <Reveal className="ask-intro">
-          <p className="sec-label mono">Ask</p>
           <h2 id="ask-h" className="band-h">
-            Ask about my work<span className="amp">.</span>
+            {ASK.heading}
+            <span className="amp">.</span>
           </h2>
-          <p className="band-lede">
-            Questions about my experience, the products or how we could work together. Answers are written by Claude from
-            this site’s content only, and it says so when it does not know.
-          </p>
-          <p className="hint mono">
-            Press <kbd className="kbd">/</kbd> from anywhere
-          </p>
+          <p className="band-lede">{ASK.lead}</p>
         </Reveal>
         <Reveal className="ask-main" delay={80}>
           <Ask />
-          <ShortAnswers />
         </Reveal>
       </div>
     </section>
@@ -292,7 +281,7 @@ function NowAndWriting() {
       <div className="wrap two-col">
         <Reveal as="section" id="now" className="col" aria-labelledby="now-h">
           <p className="sec-label mono">
-            Updated <time dateTime={PROFILE.updatedIso}>{PROFILE.updated}</time>
+            <time dateTime={PROFILE.updatedIso}>{PROFILE.updated}</time>
           </p>
           <h2 id="now-h" className="sec-h sec-h-sm">
             Now
@@ -345,7 +334,7 @@ function Credentials() {
   return (
     <section className="sec sec-tight" aria-labelledby="cred-h">
       <div className="wrap">
-        <h2 id="cred-h" className="sr-only">
+        <h2 id="cred-h" hidden>
           Education and credentials
         </h2>
         <ul className="creds">

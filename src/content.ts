@@ -20,7 +20,6 @@ export type Clip = {
   webm: string
   poster: string
   alt: string
-  caption: string
   /** Second to start from. */
   start?: number
 }
@@ -149,18 +148,10 @@ export const PROFILE: Profile = {
   updatedIso: '2026-10',
 }
 
-/**
- * Hero copy. Chosen from six options (see the build report). The line is the
- * takeaway of the founder's own field note on receipt scanning.
- */
+/** Hero copy. */
 export const HERO = {
   kicker: 'Raffay Sajjad, staff product engineer',
   line: ['The model call is the easy part.', 'I build the rest.'],
-  /** Credit for the line, linked. */
-  lineSource: {
-    text: 'Receipt scanning in production',
-    href: `${SITE.notesBase}/receipt-scanning-in-production`,
-  },
   sub: [
     'I ship AI products end to end: the app, the server, the model calls, the billing and the App Store listing. ',
     // FACT-CHECK: "seven years" is derived from CV dates (Apr 2019 to Oct 2026).
@@ -197,7 +188,8 @@ export const SHIPPING: ShippingRow[] = [
     name: 'Reelife',
     state: 'live',
     status: 'On the Shopify App Store',
-    line: 'A Shopify SaaS app, run on the side since 2023.',
+    // FACT-CHECK: neutral placeholder. The founder will supply the real one-line description of Reelife.
+    line: 'An app for Shopify merchants.',
   },
 ]
 
@@ -225,7 +217,7 @@ export const ANATOMY: AnatomyStep[] = [
   },
   {
     label: 'Billing',
-    what: 'How it earns money.',
+    what: 'Subscriptions on mobile and on Shopify.',
     // FACT-CHECK: Finly's subscription billing is assumed (in-app subscriptions); Reelife's is the Shopify Billing API (CV).
     tech: 'In-app subscriptions, Shopify Billing API',
   },
@@ -278,12 +270,8 @@ export const PROJECTS: Project[] = [
       'Anthropic',
       'Railway',
     ],
-    outcomes: [
-      { figure: '2', label: 'platforms, one codebase' },
-      { figure: '3', label: 'ways in: voice, receipt, statement' },
-      // FACT-CHECK: growth claim comes from the previous site copy ("growing organically since I paused paid ads"), not the CV. Add real numbers if he wants them public.
-      { figure: 'Organic', label: 'growth since paid ads paused' },
-    ],
+    // No real metric yet. Add one here (for example downloads or ratings) only once the founder confirms a number.
+    outcomes: [],
     theme: { bg: '#2E2A8C', ink: '#F5F5F2', mute: '#C3C0F0', rule: '#5450B4' },
     devices: [
       { kind: 'iphone', clip: 'finly-voice' },
@@ -293,7 +281,7 @@ export const PROJECTS: Project[] = [
     seo: {
       title: 'Finly: an AI expense tracker I built end to end',
       description:
-        'Case study: Finly, an AI expense tracker for iPhone and Android with voice entry, receipt scanning, statement import and a tool-calling assistant that confirms before it writes. React Native, Node, Postgres.',
+        'Finly: Budget Expense Tracker is an AI expense tracker for iPhone and Android, built end to end by Raffay Sajjad. Voice entry, receipt scanning, statement import and an assistant that confirms before it writes.',
     },
   },
   {
@@ -315,68 +303,60 @@ export const PROJECTS: Project[] = [
     built: [
       'An Interactive Brokers sync, so a portfolio arrives without retyping a position.',
       'Offline-first: the app reads from an on-device cache, opens with no connection and syncs in the background.',
-      'Its own keyless market-data service: prices, dividends and FX from free public sources, each with an ordered fallback, stored in Postgres.',
+      'A market-data service of its own, with no API keys: prices, dividends and FX from free public sources, each with an ordered fallback, stored in Postgres.',
       // FACT-CHECK: the fallback-chain and merge details are from the Tiercel field note "A market-data service with no API keys".
-      'Dividends merged from two sources, with a tolerance so a one-day ex-date disagreement is not counted twice.',
+      'Dividends are merged from two sources, with a tolerance so a one-day ex-date disagreement is not counted twice.',
       // FACT-CHECK: dividend calendar, forecasts and ratings come from the Tiercel product page, not the CV.
       'A dividend calendar, income forecasts and a per-holding dividend rating.',
       'One Expo and React Native codebase for iOS, Android and web.',
     ],
     stack: ['React Native', 'Expo', 'TypeScript', 'Node', 'Postgres'],
-    outcomes: [
-      { figure: '3', label: 'platforms, one codebase' },
-      { figure: '0', label: 'paid market-data APIs' },
-      { figure: 'Beta', label: 'in testing now' },
-    ],
+    outcomes: [],
     theme: { bg: '#0B4D3C', ink: '#F5F5F2', mute: '#A9D8C6', rule: '#2F7561' },
     devices: [{ kind: 'iphone', clip: 'investolio-demo' }],
     notes: ['a-market-data-service-with-no-api-keys'],
     seo: {
       title: 'Investolio: a dividend tracker with its own market-data service',
       description:
-        'Case study: Investolio, a dividend and portfolio tracker for iOS, Android and web, in beta. Interactive Brokers sync, offline-first, and a keyless market-data service with fallbacks.',
+        'Investolio is a dividend and portfolio tracker for iOS, Android and web, now in beta. It syncs with Interactive Brokers, works offline and runs on its own keyless market-data service.',
     },
   },
   {
     slug: 'reelife',
     name: 'Reelife',
     display: 'Reelife',
-    // FACT-CHECK: the CV facts do not say what Reelife does for merchants. Replace this line with a one-sentence description.
-    tagline: 'A Shopify SaaS app, live on the Shopify App Store.',
+    // FACT-CHECK: the CV facts do not say what Reelife does for merchants. Neutral placeholder; replace with the founder's one-sentence description.
+    tagline: 'An app for Shopify merchants.',
     kind: 'product',
     period: 'Jun 2023–now',
-    // FACT-CHECK: "built end to end" assumes he built Reelife alone.
-    role: 'Side project, built end to end',
+    // FACT-CHECK: "built end to end" assumes he built Reelife alone. "Side project" was dropped from the visible copy because the founder says it is wrong.
+    role: 'Built end to end',
     status: { label: 'On the Shopify App Store', live: true },
     href: 'https://apps.shopify.com/reelife',
     hrefLabel: 'apps.shopify.com/reelife',
     platforms: 'Shopify',
     problem: [
       // FACT-CHECK: written for the page. Rewrite with what Reelife actually does for a merchant.
-      'Shopify merchants need software that installs from the App Store, bills through Shopify and shows them what is happening as it happens.',
+      'Reelife is a Shopify app that merchants install from the App Store and use inside their admin. It bills through Shopify and gives them a real-time dashboard.',
     ],
     built: [
       // FACT-CHECK: "embedded in the Shopify admin" is assumed; the CV only says Remix frontend.
       'A Remix frontend embedded in the Shopify admin.',
       'Nest.js microservices behind it, packaged with Docker and run on Kubernetes.',
-      'Hosting on AWS.',
+      'Hosted on AWS.',
       'Subscriptions through the Shopify Billing API.',
       'A real-time dashboard for merchants.',
     ],
     stack: ['Remix', 'Nest.js', 'AWS', 'Docker', 'Kubernetes', 'Shopify Billing API'],
-    outcomes: [
-      // FACT-CHECK: an older CV says "10 merchants". Confirm the current number before stating one.
-      { figure: 'Merchants', label: 'use it on Shopify' },
-      { figure: '2023', label: 'live since June' },
-      { figure: 'Billing', label: 'through the Shopify Billing API' },
-    ],
+    // FACT-CHECK: an older CV says "10 merchants". Add a merchant count here only once the founder confirms the current number.
+    outcomes: [],
     theme: { bg: '#F0E7D6', ink: '#14130F', mute: '#5C5748', rule: '#CFC3AB' },
     devices: [],
     notes: [],
     seo: {
-      title: 'Reelife: a Shopify SaaS app on Remix, Nest.js and Kubernetes',
+      title: 'Reelife: an app for Shopify merchants',
       description:
-        'Case study: Reelife, a Shopify SaaS app used by merchants. Remix frontend, Nest.js microservices, AWS, Docker and Kubernetes, Shopify Billing API and a real-time merchant dashboard.',
+        'Reelife is an app for Shopify merchants, built by Raffay Sajjad with a Remix frontend, Nest.js microservices on AWS and Kubernetes, Shopify Billing and a real-time dashboard.',
     },
   },
   {
@@ -407,7 +387,6 @@ export const PROJECTS: Project[] = [
     outcomes: [
       { figure: '+15%', label: 'UI responsiveness' },
       { figure: '−10%', label: 'load times' },
-      { figure: '4', label: 'person team led' },
     ],
     theme: { bg: '#14130F', ink: '#F4F1EA', mute: '#A9A598', rule: '#3A3830' },
     devices: [],
@@ -415,7 +394,7 @@ export const PROJECTS: Project[] = [
     seo: {
       title: 'Trafilea: tech lead on a flagship e-commerce platform',
       description:
-        'Case study: Raffay Sajjad as Staff Frontend Engineer and Tech Lead at Trafilea since July 2022. Led a team of four; React and Next.js performance work, +15% UI responsiveness and 10% faster loads.',
+        'Raffay Sajjad has been Staff Frontend Engineer and Tech Lead at Trafilea since July 2022, leading a team of four on a flagship e-commerce platform. React and Next.js performance work: 15% better UI responsiveness and 10% faster loads.',
     },
   },
 ]
@@ -444,21 +423,21 @@ export const TIMELINE: TimelineEntry[] = [
     from: '2022-07',
     to: null,
     impact:
-      'Led a team of four on a flagship e-commerce platform. +15% UI responsiveness, −10% load times, apps moved to AWS EC2 with Docker.',
+      'Tech lead for a team of four on a flagship e-commerce platform. Improved UI responsiveness by 15% and load times by 10%, and moved apps to AWS EC2 with Docker.',
     stack: ['React', 'Next.js', 'GraphQL', 'AWS', 'Docker'],
     projectSlug: 'trafilea',
   },
   {
     org: 'Reelife',
     orgHref: 'https://apps.shopify.com/reelife',
-    // FACT-CHECK: "Founder" for Reelife is assumed; the CV says side project.
-    role: 'Founder, side project',
+    // FACT-CHECK: "Founder" for Reelife is assumed; the CV says side project, which the founder says is wrong.
+    role: 'Founder',
     place: 'Shopify App Store',
     period: 'Jun 2023–now',
     from: '2023-06',
     to: null,
     impact:
-      'A Shopify SaaS app with Shopify Billing and a real-time merchant dashboard, used by Shopify merchants.',
+      'An app for Shopify merchants, with Shopify Billing and a real-time dashboard.',
     stack: ['Remix', 'Nest.js', 'AWS', 'Kubernetes'],
     projectSlug: 'reelife',
   },
@@ -470,7 +449,7 @@ export const TIMELINE: TimelineEntry[] = [
     from: '2022-04',
     to: '2022-10',
     impact:
-      'On a financial management app: +20% UI responsiveness, a class-to-hooks migration and a testing strategy.',
+      'Worked on a financial management app: 20% better UI responsiveness, a class-to-hooks migration and a testing strategy.',
     stack: ['React', 'React Native'],
   },
   {
@@ -481,7 +460,7 @@ export const TIMELINE: TimelineEntry[] = [
     period: 'Jan 2021–Apr 2022',
     from: '2021-01',
     to: '2022-04',
-    impact: '+30% interface responsiveness, client delivery and code reviews.',
+    impact: 'Shipped client work, reviewed code and improved interface responsiveness by 30%.',
     stack: ['React', 'Next.js'],
   },
   {
@@ -492,7 +471,7 @@ export const TIMELINE: TimelineEntry[] = [
     from: '2019-04',
     to: '2020-12',
     // FACT-CHECK: "FRS" is expanded here as functional requirement specifications.
-    impact: 'B2B apps, and functional requirement specification (FRS) documents for 10+ projects.',
+    impact: 'Built B2B apps and wrote functional requirement specifications for more than ten projects.',
     stack: [],
   },
 ]
@@ -548,7 +527,7 @@ export const NOW: NowEntry[] = [
     tag: 'building',
     body: [
       { text: 'Investolio', href: INVESTOLIO_URL },
-      ', the dividend and portfolio tracker, which is in beta, and AI-powered apps for partner companies through ',
+      ', a dividend and portfolio tracker now in beta, and AI-powered apps for partner companies at ',
       { text: 'Tiercel', href: 'https://tiercel.io' },
       '.',
     ],
@@ -559,8 +538,7 @@ export const NOW: NowEntry[] = [
     tag: 'shipping',
     body: [
       { text: 'Finly', href: 'https://heyfinly.com' },
-      ', the AI expense tracker for iPhone and Android, which is growing organically since I paused paid ads.',
-      // FACT-CHECK: "growing organically since I paused paid ads" is carried over from the previous version of this site.
+      ', my AI expense tracker for iPhone and Android.',
     ],
   },
   {
@@ -568,7 +546,7 @@ export const NOW: NowEntry[] = [
     iso: '2026-10',
     tag: 'writing',
     body: [
-      'Four field notes written from the Finly and Investolio code, on receipt scanning, confirm-before-write assistants, a keyless market-data service and self-hosted OTA updates. They are on ',
+      'Receipt scanning, assistants that confirm before they write, and market data without API keys, on ',
       { text: 'the Tiercel journal', href: SITE.notesBase },
       '.',
     ],
@@ -649,7 +627,9 @@ export const PARTNER = {
 /** Ask about my work. */
 export const ASK = {
   heading: 'Ask about my work',
-  lead: 'Ask anything about my experience and products. Answers come from this site’s content only.',
+  lead: 'Curious about my experience, my products or working together? Ask away.',
+  /** Tiny label beside the input. */
+  label: 'AI · answers from my work',
   placeholder: 'What would you like to know?',
   chips: [
     'What has Raffay shipped?',
@@ -661,9 +641,9 @@ export const ASK = {
 }
 
 /**
- * Pre-written answers. They are shown as the suggested-question fallback when
- * no live model is configured, and published on the page as a short FAQ. They
- * are written from the content above and nothing else.
+ * Answers for the suggested questions. They back the Ask box when the live
+ * model is not reachable and are part of the knowledge file. They are written
+ * from the content above and nothing else.
  */
 // FACT-CHECK: all answers below are written from the content above, so they inherit every FACT-CHECK note in this file.
 export const QA_LIST: QA[] = [
@@ -671,21 +651,21 @@ export const QA_LIST: QA[] = [
     id: 'shipped',
     question: 'What has Raffay shipped?',
     answer:
-      'Three products of his own. Finly: Budget Expense Tracker (2025 to now) is an AI expense tracker for iPhone and Android with voice entry, receipt scanning, PDF and CSV statement import and an assistant that confirms before it writes. Investolio (2026 to now, in beta) is a dividend and portfolio tracker for iOS, Android and web. Reelife (June 2023 to now) is a Shopify SaaS app used by Shopify merchants. Before that he shipped for other companies: Trafilea, Planto and Netsol.',
+      'Three products of his own. Finly (2025 to now) is an AI expense tracker for iPhone and Android with voice entry, receipt scanning, PDF and CSV statement import and an assistant that confirms before it writes. Investolio (2026 to now, in beta) is a dividend and portfolio tracker for iOS, Android and web. Reelife (June 2023 to now) is an app for Shopify merchants. Before that he shipped for other companies: Trafilea, Planto and Netsol.',
     keywords: ['shipped', 'built', 'ship', 'products', 'product', 'apps', 'made', 'finly', 'investolio', 'reelife', 'portfolio', 'projects', 'work'],
   },
   {
     id: 'ai',
     question: 'What’s his experience with AI in production?',
     answer:
-      'Finly runs LLM features in production: voice entry with Whisper, receipt scanning with a vision model that returns draft transactions, PDF and CSV statement import, and a tool-calling assistant that confirms before it writes. It uses OpenAI and Anthropic models behind a Node API. He also writes up what he learns as field notes on the Tiercel journal, such as receipt scanning in production and confirm-before-you-write assistants.',
+      'Finly runs LLM features in production: voice entry with Whisper, receipt scanning with a vision model that returns draft transactions, PDF and CSV statement import, and a tool-calling assistant that confirms before it writes. It uses OpenAI and Anthropic models behind a Node API. He writes about it on the Tiercel journal, including receipt scanning in production and assistants that confirm before they write.',
     keywords: ['ai', 'llm', 'llms', 'model', 'models', 'openai', 'anthropic', 'claude', 'gpt', 'whisper', 'vision', 'production', 'agent', 'assistant', 'tool', 'machine', 'learning'],
   },
   {
     id: 'partner',
     question: 'Is he open to partner work?',
     answer:
-      'Yes. Tiercel, the company he founded, partners with companies that want to build their own AI-powered apps. The way to start is an email to contact@raffaysajjad.com.',
+      'Yes. Tiercel, the company he founded, partners with companies that want to build their own AI-powered apps. The way to start is to email contact@raffaysajjad.com.',
     keywords: ['partner', 'partnership', 'hire', 'hiring', 'available', 'availability', 'open', 'freelance', 'contract', 'consult', 'work', 'engage', 'tiercel', 'client', 'clients'],
   },
   {

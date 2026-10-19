@@ -3,7 +3,6 @@ import {
   LINKS,
   PROFILE,
   PROJECTS,
-  QA_LIST,
   SITE,
   type Project,
 } from './content'
@@ -166,15 +165,6 @@ export function buildJsonLd(route: string): object[] {
         url: `${SITE.url}/`,
         name: `${PROFILE.name}, ${PROFILE.headline}`,
         mainEntity: person(),
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: QA_LIST.map((q) => ({
-          '@type': 'Question',
-          name: q.question,
-          acceptedAnswer: { '@type': 'Answer', text: q.answer },
-        })),
       },
     ]
   }

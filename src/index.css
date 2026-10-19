@@ -461,13 +461,6 @@ button {
   padding: 10px 0;
 }
 
-.hero-credit {
-  margin-top: 28px;
-  max-width: 36rem;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-
 /* The stage: two solid product fields, a real phone playing a real recording in each. */
 .stage-top {
   display: flex;
@@ -525,33 +518,30 @@ button {
   transform: translate3d(calc(var(--mx, 0) * 9px), calc(var(--my, 0) * 6px), 0);
 }
 
-.stage figcaption {
-  margin-top: 10px;
-  color: var(--ink-2);
-}
-
 .motion-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
   background: none;
-  border: 0;
-  padding: 4px 0;
+  border: 1px solid currentColor;
+  border-radius: 50%;
   color: var(--ink-2);
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 0.72rem;
+  opacity: 0.8;
 }
 
 .motion-toggle:hover {
   color: var(--ink);
+  opacity: 1;
 }
 
 .motion-icon {
-  width: 9px;
-  height: 10px;
-  border-left: 3px solid currentColor;
-  border-right: 3px solid currentColor;
+  width: 8px;
+  height: 9px;
+  border-left: 2.5px solid currentColor;
+  border-right: 2.5px solid currentColor;
 }
 
 .motion-icon.is-play {
@@ -561,6 +551,7 @@ button {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 8px solid currentColor;
+  margin-left: 2px;
 }
 
 /* The ledger under the hero. */
@@ -740,13 +731,6 @@ video::-webkit-media-controls-start-playback-button {
   margin-top: clamp(28px, 5vw, 64px);
 }
 
-.dev-cap {
-  margin-top: 14px;
-  text-align: center;
-  color: var(--card-mute, var(--ink-2));
-  font-size: 0.72rem;
-}
-
 /* ------------------------------------------------------------------ */
 /* Bands: Ask and Contact                                              */
 /* ------------------------------------------------------------------ */
@@ -803,11 +787,6 @@ video::-webkit-media-controls-start-playback-button {
   }
 }
 
-.hint {
-  margin-top: 28px;
-  color: var(--inv-mute);
-}
-
 .band .kbd {
   background: transparent;
   border-color: var(--inv-rule);
@@ -851,25 +830,17 @@ video::-webkit-media-controls-start-playback-button {
 }
 
 .ask-log {
-  min-height: 200px;
   max-height: 380px;
   overflow-y: auto;
   padding: 20px 22px 8px;
 }
 
-.ask-empty {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--inv-mute);
-  padding-top: 4px;
+.ask-log:empty {
+  padding: 0;
 }
 
-.ask-caret {
-  width: 8px;
-  height: 16px;
-  background: var(--inv-accent);
-  animation: blink 1.1s steps(1) infinite;
+.ask-log:empty + .ask-form {
+  border-top: 0;
 }
 
 @keyframes blink {
@@ -882,25 +853,9 @@ video::-webkit-media-controls-start-playback-button {
   margin-bottom: 18px;
 }
 
-.msg-who {
-  color: var(--inv-mute);
-  margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 0.68rem;
-}
-
-.msg-assistant .msg-who {
-  color: var(--inv-accent);
-}
-
 .msg-body {
   white-space: pre-wrap;
   line-height: 1.55;
-}
-
-.msg.is-example {
-  opacity: 0.7;
 }
 
 .msg-user .msg-body {
@@ -977,52 +932,10 @@ video::-webkit-media-controls-start-playback-button {
 }
 
 .ask-note {
-  margin-top: 14px;
+  margin-top: 10px;
+  font-size: 0.72rem;
   color: var(--inv-mute);
   line-height: 1.6;
-}
-
-.short-answers {
-  margin-top: 28px;
-  border-top: 1px solid var(--inv-rule);
-}
-
-.short-answers summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 0;
-  cursor: pointer;
-  list-style: none;
-  color: var(--inv-mute);
-  font-size: 0.95rem;
-}
-
-.short-answers summary::-webkit-details-marker {
-  display: none;
-}
-
-.short-answers[open] summary .arrow {
-  transform: rotate(180deg);
-}
-
-.short-answers dl > div {
-  padding: 14px 0 16px;
-  border-top: 1px solid var(--inv-rule);
-}
-
-.short-answers dt {
-  font-family: var(--display);
-  font-size: 1.15rem;
-  font-variation-settings: 'opsz' 36;
-  margin-bottom: 6px;
-}
-
-.short-answers dd {
-  color: var(--inv-mute);
-  font-size: 0.95rem;
-  max-width: 44rem;
 }
 
 /* ------------------------------------------------------------------ */

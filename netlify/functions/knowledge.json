@@ -44,7 +44,8 @@
   },
   "projects": [
     {
-      "name": "Finly: Budget Expense Tracker",
+      "name": "Finly",
+      "officialName": "Finly: Budget Expense Tracker",
       "kind": "product",
       "period": "2025–now",
       "role": "Built end to end",
@@ -78,11 +79,7 @@
         "Anthropic",
         "Railway"
       ],
-      "outcomes": [
-        "2 platforms, one codebase",
-        "3 ways in: voice, receipt, statement",
-        "Organic growth since paid ads paused"
-      ]
+      "outcomes": []
     },
     {
       "name": "Investolio",
@@ -100,8 +97,8 @@
       "built": [
         "An Interactive Brokers sync, so a portfolio arrives without retyping a position.",
         "Offline-first: the app reads from an on-device cache, opens with no connection and syncs in the background.",
-        "Its own keyless market-data service: prices, dividends and FX from free public sources, each with an ordered fallback, stored in Postgres.",
-        "Dividends merged from two sources, with a tolerance so a one-day ex-date disagreement is not counted twice.",
+        "A market-data service of its own, with no API keys: prices, dividends and FX from free public sources, each with an ordered fallback, stored in Postgres.",
+        "Dividends are merged from two sources, with a tolerance so a one-day ex-date disagreement is not counted twice.",
         "A dividend calendar, income forecasts and a per-holding dividend rating.",
         "One Expo and React Native codebase for iOS, Android and web."
       ],
@@ -112,29 +109,25 @@
         "Node",
         "Postgres"
       ],
-      "outcomes": [
-        "3 platforms, one codebase",
-        "0 paid market-data APIs",
-        "Beta in testing now"
-      ]
+      "outcomes": []
     },
     {
       "name": "Reelife",
       "kind": "product",
       "period": "Jun 2023–now",
-      "role": "Side project, built end to end",
+      "role": "Built end to end",
       "status": "On the Shopify App Store",
       "platforms": "Shopify",
       "link": "https://apps.shopify.com/reelife",
       "page": "https://raffaysajjad.com/work/reelife",
-      "tagline": "A Shopify SaaS app, live on the Shopify App Store.",
+      "tagline": "An app for Shopify merchants.",
       "problem": [
-        "Shopify merchants need software that installs from the App Store, bills through Shopify and shows them what is happening as it happens."
+        "Reelife is a Shopify app that merchants install from the App Store and use inside their admin. It bills through Shopify and gives them a real-time dashboard."
       ],
       "built": [
         "A Remix frontend embedded in the Shopify admin.",
         "Nest.js microservices behind it, packaged with Docker and run on Kubernetes.",
-        "Hosting on AWS.",
+        "Hosted on AWS.",
         "Subscriptions through the Shopify Billing API.",
         "A real-time dashboard for merchants."
       ],
@@ -146,11 +139,7 @@
         "Kubernetes",
         "Shopify Billing API"
       ],
-      "outcomes": [
-        "Merchants use it on Shopify",
-        "2023 live since June",
-        "Billing through the Shopify Billing API"
-      ]
+      "outcomes": []
     },
     {
       "name": "Trafilea",
@@ -182,8 +171,7 @@
       ],
       "outcomes": [
         "+15% UI responsiveness",
-        "−10% load times",
-        "4 person team led"
+        "−10% load times"
       ]
     }
   ],
@@ -207,7 +195,7 @@
       "role": "Staff Frontend Engineer & Tech Lead",
       "place": "Montevideo, UY (remote)",
       "period": "Jul 2022–now",
-      "impact": "Led a team of four on a flagship e-commerce platform. +15% UI responsiveness, −10% load times, apps moved to AWS EC2 with Docker.",
+      "impact": "Tech lead for a team of four on a flagship e-commerce platform. Improved UI responsiveness by 15% and load times by 10%, and moved apps to AWS EC2 with Docker.",
       "stack": [
         "React",
         "Next.js",
@@ -218,10 +206,10 @@
     },
     {
       "organization": "Reelife",
-      "role": "Founder, side project",
+      "role": "Founder",
       "place": "Shopify App Store",
       "period": "Jun 2023–now",
-      "impact": "A Shopify SaaS app with Shopify Billing and a real-time merchant dashboard, used by Shopify merchants.",
+      "impact": "An app for Shopify merchants, with Shopify Billing and a real-time dashboard.",
       "stack": [
         "Remix",
         "Nest.js",
@@ -234,7 +222,7 @@
       "role": "Senior Frontend Engineer",
       "place": "Hong Kong SAR",
       "period": "Apr–Oct 2022",
-      "impact": "On a financial management app: +20% UI responsiveness, a class-to-hooks migration and a testing strategy.",
+      "impact": "Worked on a financial management app: 20% better UI responsiveness, a class-to-hooks migration and a testing strategy.",
       "stack": [
         "React",
         "React Native"
@@ -245,7 +233,7 @@
       "role": "Senior Software Engineer",
       "place": "Lahore, Pakistan",
       "period": "Jan 2021–Apr 2022",
-      "impact": "+30% interface responsiveness, client delivery and code reviews.",
+      "impact": "Shipped client work, reviewed code and improved interface responsiveness by 30%.",
       "stack": [
         "React",
         "Next.js"
@@ -256,7 +244,7 @@
       "role": "Software Engineer",
       "place": "Lahore, Pakistan",
       "period": "Apr 2019–Dec 2020",
-      "impact": "B2B apps, and functional requirement specification (FRS) documents for 10+ projects.",
+      "impact": "Built B2B apps and wrote functional requirement specifications for more than ten projects.",
       "stack": []
     }
   ],
@@ -327,17 +315,17 @@
     {
       "date": "Oct 2026",
       "doing": "building",
-      "text": "Investolio, the dividend and portfolio tracker, which is in beta, and AI-powered apps for partner companies through Tiercel."
+      "text": "Investolio, a dividend and portfolio tracker now in beta, and AI-powered apps for partner companies at Tiercel."
     },
     {
       "date": "Oct 2026",
       "doing": "shipping",
-      "text": "Finly, the AI expense tracker for iPhone and Android, which is growing organically since I paused paid ads."
+      "text": "Finly, my AI expense tracker for iPhone and Android."
     },
     {
       "date": "Oct 2026",
       "doing": "writing",
-      "text": "Four field notes written from the Finly and Investolio code, on receipt scanning, confirm-before-write assistants, a keyless market-data service and self-hosted OTA updates. They are on the Tiercel journal."
+      "text": "Receipt scanning, assistants that confirm before they write, and market data without API keys, on the Tiercel journal."
     }
   ],
   "writing": [
@@ -372,18 +360,18 @@
       "url": "https://tiercel.io/notes/local-models-when-data-cannot-leave"
     }
   ],
-  "prewrittenAnswers": [
+  "commonQuestions": [
     {
       "question": "What has Raffay shipped?",
-      "answer": "Three products of his own. Finly: Budget Expense Tracker (2025 to now) is an AI expense tracker for iPhone and Android with voice entry, receipt scanning, PDF and CSV statement import and an assistant that confirms before it writes. Investolio (2026 to now, in beta) is a dividend and portfolio tracker for iOS, Android and web. Reelife (June 2023 to now) is a Shopify SaaS app used by Shopify merchants. Before that he shipped for other companies: Trafilea, Planto and Netsol."
+      "answer": "Three products of his own. Finly (2025 to now) is an AI expense tracker for iPhone and Android with voice entry, receipt scanning, PDF and CSV statement import and an assistant that confirms before it writes. Investolio (2026 to now, in beta) is a dividend and portfolio tracker for iOS, Android and web. Reelife (June 2023 to now) is an app for Shopify merchants. Before that he shipped for other companies: Trafilea, Planto and Netsol."
     },
     {
       "question": "What’s his experience with AI in production?",
-      "answer": "Finly runs LLM features in production: voice entry with Whisper, receipt scanning with a vision model that returns draft transactions, PDF and CSV statement import, and a tool-calling assistant that confirms before it writes. It uses OpenAI and Anthropic models behind a Node API. He also writes up what he learns as field notes on the Tiercel journal, such as receipt scanning in production and confirm-before-you-write assistants."
+      "answer": "Finly runs LLM features in production: voice entry with Whisper, receipt scanning with a vision model that returns draft transactions, PDF and CSV statement import, and a tool-calling assistant that confirms before it writes. It uses OpenAI and Anthropic models behind a Node API. He writes about it on the Tiercel journal, including receipt scanning in production and assistants that confirm before they write."
     },
     {
       "question": "Is he open to partner work?",
-      "answer": "Yes. Tiercel, the company he founded, partners with companies that want to build their own AI-powered apps. The way to start is an email to contact@raffaysajjad.com."
+      "answer": "Yes. Tiercel, the company he founded, partners with companies that want to build their own AI-powered apps. The way to start is to email contact@raffaysajjad.com."
     },
     {
       "question": "What stack does he use?",

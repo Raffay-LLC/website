@@ -3,17 +3,13 @@ import type { Clip, DeviceKind } from '../content'
 import { devices } from '../devices'
 import { getPaused, getServerPaused, setPaused, subscribe, useMotionAllowed } from '../lib/motion'
 
+/** One small icon-only control that pauses or plays every recording on the page. */
 export function MotionToggle() {
   const isPaused = useSyncExternalStore(subscribe, getPaused, getServerPaused)
+  const label = isPaused ? 'Play recordings' : 'Pause recordings'
   return (
-    <button
-      type="button"
-      className="motion-toggle mono"
-      aria-pressed={isPaused}
-      onClick={() => setPaused(!isPaused)}
-    >
+    <button type="button" className="motion-toggle" aria-label={label} title={label} onClick={() => setPaused(!isPaused)}>
       <span className={`motion-icon${isPaused ? ' is-play' : ''}`} aria-hidden="true" />
-      {isPaused ? 'Play recordings' : 'Pause recordings'}
     </button>
   )
 }

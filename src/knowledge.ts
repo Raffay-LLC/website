@@ -44,7 +44,8 @@ export function buildKnowledge() {
       partnerShapes: PARTNER.shapes,
     },
     projects: PROJECTS.map((p) => ({
-      name: p.name,
+      name: p.display,
+      ...(p.name !== p.display ? { officialName: p.name } : {}),
       kind: p.kind,
       period: p.period,
       role: p.role,
@@ -79,7 +80,7 @@ export function buildKnowledge() {
       date: w.date,
       url: `${SITE.notesBase}/${w.slug}`,
     })),
-    prewrittenAnswers: QA_LIST.map((q) => ({
+    commonQuestions: QA_LIST.map((q) => ({
       question: q.question,
       answer: q.answer,
     })),
