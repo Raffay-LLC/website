@@ -1,21 +1,7 @@
-/**
- * All site content lives here. App.tsx only renders it.
- *
- * Anything that Raffay still has to supply is marked TODO(raffay) and is
- * rendered in the UI with a visible "placeholder" treatment (see .todo in
- * index.css). Search for `TODO(raffay)` to find every one.
- */
+/** All site content lives here. App.tsx only renders it. */
 
-export const TODO = 'TODO(raffay)'
-
-/** True when a value is an unfilled placeholder. */
-export const isTodo = (value: string) => value.startsWith(TODO)
-
-/** Inline content: plain text, a link, or a visible placeholder. */
-export type Span =
-  | string
-  | { text: string; href: string }
-  | { todo: string }
+/** Inline content: plain text or a link. */
+export type Span = string | { text: string; href: string }
 
 export type Profile = {
   name: string
@@ -31,7 +17,7 @@ export type Profile = {
   updatedIso: string
 }
 
-export type NowTag = 'building' | 'shipping' | 'reading'
+export type NowTag = 'building' | 'shipping'
 
 export type NowEntry = {
   /** Month + year, shown in the margin. */
@@ -64,6 +50,9 @@ export type LinkEntry = {
   href: string
 }
 
+/** Investolio has no site of its own; it lives under Tiercel. */
+const INVESTOLIO_URL = 'https://tiercel.io/products/investolio'
+
 export const PROFILE: Profile = {
   name: 'Raffay Sajjad',
   role: 'Founder',
@@ -83,11 +72,14 @@ export const PROFILE: Profile = {
       { text: 'Tiercel', href: 'https://tiercel.io' },
       ', where I build AI-powered apps like ',
       { text: 'Finly', href: 'https://heyfinly.com' },
-      ' and Investolio.',
+      ' and ',
+      { text: 'Investolio', href: INVESTOLIO_URL },
+      '.',
     ],
     [
-      // TODO(raffay): link Investolio here once it has a public URL.
-      'Tiercel is an independent software company. Finly is an AI expense tracker for iPhone and Android, and Investolio is a dividend and portfolio tracker that is in beta. We also partner with companies that want to build their own AI-powered apps.',
+      'Tiercel is an independent software company. Finly is an AI expense tracker for iPhone and Android, and ',
+      { text: 'Investolio', href: INVESTOLIO_URL },
+      ' is a dividend and portfolio tracker that is in beta. We also partner with companies that want to build their own AI-powered apps.',
     ],
     [
       'I’m based in Lahore, Pakistan, and by day I do engineering at ',
@@ -119,12 +111,6 @@ export const NOW: NowEntry[] = [
       ', the AI expense tracker for iPhone and Android, is growing organically since I paused paid ads.',
     ],
   },
-  {
-    date: 'Oct 2026',
-    iso: '2026-10',
-    tag: 'reading',
-    body: [{ todo: 'add what you are reading right now' }],
-  },
 ]
 
 export const WORK: WorkEntry[] = [
@@ -132,39 +118,35 @@ export const WORK: WorkEntry[] = [
     name: 'Tiercel',
     href: 'https://tiercel.io',
     label: 'Founder',
-    period: `${TODO}–now`,
+    period: '2026–now',
     body: 'An independent software company building AI-powered apps, and a partner for companies that want to build theirs.',
   },
   {
-    name: 'Finly',
+    name: 'Finly: Budget Expense Tracker',
     href: 'https://heyfinly.com',
     label: 'Built',
-    period: TODO,
+    period: '2025–now',
     body: 'An AI expense tracker for iPhone and Android.',
   },
   {
     name: 'Investolio',
-    // TODO(raffay): add the public URL once Investolio is live. Until then it
-    // links to Tiercel.
-    href: 'https://tiercel.io',
+    href: INVESTOLIO_URL,
     label: 'Building',
-    period: `${TODO}–now`,
+    period: '2026–now',
     body: 'A dividend and portfolio tracker, now in beta.',
   },
   {
     name: 'Trafilea',
     href: 'https://trafilea.com',
     label: 'Engineering',
-    period: `${TODO}–now`,
+    period: '2022–now',
     body: 'Engineering at Trafilea.',
   },
 ]
 
 /**
- * Real notes from tiercel.io/notes (titles, slugs and dates from the Tiercel
- * repo). The four field notes come first (lib/notes/field-notes.ts on
- * tiercel-labs design/product-company, still marked draft there), then the
- * older notes, newest first.
+ * Notes published on tiercel.io/notes. The four field notes come first, then
+ * the older notes, newest first.
  */
 export const WRITING: WritingEntry[] = [
   {
@@ -222,7 +204,7 @@ export const WRITING: WritingEntry[] = [
 export const NOTES_BASE_URL = 'https://tiercel.io/notes'
 
 export const LINKS: LinkEntry[] = [
-  { label: 'GitHub', href: `${TODO}: https://github.com/<handle>` },
-  { label: 'LinkedIn', href: `${TODO}: https://www.linkedin.com/in/<handle>` },
-  { label: 'X', href: `${TODO}: https://x.com/<handle>` },
+  { label: 'GitHub', href: 'https://github.com/RaffaySajjad' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/raffaysajjad' },
+  { label: 'X', href: 'https://x.com/raffaysajjad' },
 ]

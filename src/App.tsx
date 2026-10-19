@@ -5,49 +5,21 @@ import {
   PROFILE,
   WORK,
   WRITING,
-  isTodo,
   type Span,
 } from './content'
-
-function Todo({
-  children,
-  compact = false,
-}: {
-  children: string
-  compact?: boolean
-}) {
-  return (
-    <span className="todo" title="Placeholder: fill this in in src/content.ts">
-      {compact ? null : <span className="todo-flag">placeholder</span>}
-      {compact ? '' : ' '}TODO(raffay)
-      {children ? `: ${children}` : ''}
-    </span>
-  )
-}
 
 function Spans({ items }: { items: Span[] }) {
   return (
     <>
-      {items.map((item, i) => {
-        if (typeof item === 'string') return item
-        if ('todo' in item) return <Todo key={i}>{item.todo}</Todo>
-        return (
+      {items.map((item, i) =>
+        typeof item === 'string' ? (
+          item
+        ) : (
           <a key={i} href={item.href}>
             {item.text}
           </a>
-        )
-      })}
-    </>
-  )
-}
-
-function Period({ value }: { value: string }) {
-  if (!isTodo(value)) return <>{value}</>
-  const rest = value.replace('TODO(raffay)', '').trim()
-  return (
-    <>
-      <Todo compact>{''}</Todo>
-      {rest ? ` ${rest}` : ''}
+        ),
+      )}
     </>
   )
 }
@@ -139,9 +111,7 @@ export default function App() {
                 <li key={item.name} className="row">
                   <p className="margin mono meta">
                     <span className="tag">{item.label}</span>
-                    <span>
-                      <Period value={item.period} />
-                    </span>
+                    <span>{item.period}</span>
                   </p>
                   <p className="body">
                     <a href={item.href}>{item.name}</a>
@@ -192,11 +162,7 @@ export default function App() {
                 <li key={link.label} className="row">
                   <p className="margin mono meta">{link.label}</p>
                   <p className="body">
-                    {isTodo(link.href) ? (
-                      <Todo>{`${link.label} URL`}</Todo>
-                    ) : (
-                      <a href={link.href}>{displayUrl(link.href)}</a>
-                    )}
+                    <a href={link.href}>{displayUrl(link.href)}</a>
                   </p>
                 </li>
               ))}

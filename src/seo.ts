@@ -1,4 +1,4 @@
-import { LINKS, PROFILE, isTodo } from './content'
+import { LINKS, PROFILE } from './content'
 
 /**
  * Structured data for the page, generated from content.ts so it cannot drift
@@ -9,7 +9,7 @@ export function buildJsonLd() {
   const sameAs = [
     'https://tiercel.io',
     'https://heyfinly.com',
-    ...LINKS.filter((l) => !isTodo(l.href)).map((l) => l.href),
+    ...LINKS.map((l) => l.href),
   ]
 
   return {
