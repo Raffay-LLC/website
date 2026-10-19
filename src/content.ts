@@ -20,6 +20,7 @@ export type Span =
 export type Profile = {
   name: string
   role: string
+  headline: string
   location: string
   email: string
   url: string
@@ -65,27 +66,34 @@ export type LinkEntry = {
 
 export const PROFILE: Profile = {
   name: 'Raffay Sajjad',
-  role: 'Software engineer and founder',
+  role: 'Founder',
+  /** Plain-language description, used in the page title and meta. */
+  headline: 'Software engineer and founder of Tiercel',
   location: 'Lahore, Pakistan',
   email: 'contact@raffaysajjad.com',
   url: 'https://raffaysajjad.com',
   photo: '/founder.webp',
-  photoAlt: 'Raffay Sajjad',
+  photoAlt:
+    'Portrait of Raffay Sajjad, software engineer and founder of Tiercel, in a navy blazer and black sweater',
   updated: 'Oct 2026',
   updatedIso: '2026-10',
   intro: [
     [
-      'I’m Raffay, a software engineer in Lahore, Pakistan. By day I do engineering at ',
-      { text: 'Trafilea', href: 'https://trafilea.com' },
-      '. On the side I run ',
-      { text: 'Tiercel Labs', href: 'https://tiercel.io' },
-      ', which audits how teams use Cursor, Claude Code and Codex and builds its own products.',
+      'I’m Raffay Sajjad, a software engineer and the founder of ',
+      { text: 'Tiercel', href: 'https://tiercel.io' },
+      ', where I build AI-powered apps like ',
+      { text: 'Finly', href: 'https://heyfinly.com' },
+      ' and Investolio.',
     ],
     [
-      'One of those products is ',
-      { text: 'Finly', href: 'https://heyfinly.com' },
-      ', an AI expense tracker I built that is live on iOS and Android. I write about AI engineering on ',
-      { text: 'the Tiercel notes', href: 'https://tiercel.io/notes' },
+      // TODO(raffay): link Investolio here once it has a public URL.
+      'Tiercel is an independent software company. Finly is an AI expense tracker for iPhone and Android, and Investolio is a dividend and portfolio tracker that is in beta. We also partner with companies that want to build their own AI-powered apps.',
+    ],
+    [
+      'I’m based in Lahore, Pakistan, and by day I do engineering at ',
+      { text: 'Trafilea', href: 'https://trafilea.com' },
+      '. I write up what I learn along the way as field notes on ',
+      { text: 'the Tiercel journal', href: 'https://tiercel.io/notes' },
       '.',
     ],
   ],
@@ -97,9 +105,9 @@ export const NOW: NowEntry[] = [
     iso: '2026-10',
     tag: 'building',
     body: [
-      'The AI engineering audit at ',
-      { text: 'Tiercel Labs', href: 'https://tiercel.io' },
-      ', for teams that write code with Cursor, Claude Code and Codex.',
+      'Investolio, a dividend and portfolio tracker, which is in beta. I also build AI-powered apps with partner companies through ',
+      { text: 'Tiercel', href: 'https://tiercel.io' },
+      '.',
     ],
   },
   {
@@ -108,7 +116,7 @@ export const NOW: NowEntry[] = [
     tag: 'shipping',
     body: [
       { text: 'Finly', href: 'https://heyfinly.com' },
-      ' is growing organically since I paused paid ads.',
+      ', the AI expense tracker for iPhone and Android, is growing organically since I paused paid ads.',
     ],
   },
   {
@@ -121,18 +129,27 @@ export const NOW: NowEntry[] = [
 
 export const WORK: WorkEntry[] = [
   {
-    name: 'Tiercel Labs',
+    name: 'Tiercel',
     href: 'https://tiercel.io',
     label: 'Founder',
     period: `${TODO}–now`,
-    body: 'Runs AI engineering audits for teams using Cursor, Claude Code and Codex, and builds its own products.',
+    body: 'An independent software company building AI-powered apps, and a partner for companies that want to build theirs.',
   },
   {
     name: 'Finly',
     href: 'https://heyfinly.com',
     label: 'Built',
     period: TODO,
-    body: 'An AI expense tracker, live on iOS and Android.',
+    body: 'An AI expense tracker for iPhone and Android.',
+  },
+  {
+    name: 'Investolio',
+    // TODO(raffay): add the public URL once Investolio is live. Until then it
+    // links to Tiercel.
+    href: 'https://tiercel.io',
+    label: 'Building',
+    period: `${TODO}–now`,
+    body: 'A dividend and portfolio tracker, now in beta.',
   },
   {
     name: 'Trafilea',
@@ -143,8 +160,33 @@ export const WORK: WorkEntry[] = [
   },
 ]
 
-/** Real notes from tiercel.io/notes (titles, slugs and dates from the Tiercel repo). */
+/**
+ * Real notes from tiercel.io/notes (titles, slugs and dates from the Tiercel
+ * repo). The four field notes come first (lib/notes/field-notes.ts on
+ * tiercel-labs design/product-company, still marked draft there), then the
+ * older notes, newest first.
+ */
 export const WRITING: WritingEntry[] = [
+  {
+    title: 'Receipt scanning in production',
+    slug: 'receipt-scanning-in-production',
+    date: '2026-10-19',
+  },
+  {
+    title: 'Confirm before you write: a tool-calling assistant for money',
+    slug: 'confirm-before-you-write-a-tool-calling-assistant-for-money',
+    date: '2026-10-19',
+  },
+  {
+    title: 'A market-data service with no API keys',
+    slug: 'a-market-data-service-with-no-api-keys',
+    date: '2026-10-19',
+  },
+  {
+    title: 'Shipping an Expo app with self-hosted OTA updates',
+    slug: 'shipping-an-expo-app-with-self-hosted-ota-updates',
+    date: '2026-10-19',
+  },
   {
     title: 'Decision models vs chat models in a real workflow.',
     slug: 'decision-models-vs-chat-models-in-workflows',

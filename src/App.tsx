@@ -218,9 +218,10 @@ export default function App() {
                 </span>
               </p>
               <p className="row">
-                <span className="margin mono meta">Hiring</span>
+                <span className="margin mono meta">Partner</span>
                 <span className="body">
-                  Hiring a team? <a href="https://tiercel.io">Tiercel Labs →</a>
+                  Want an AI-powered app built?{' '}
+                  <a href="https://tiercel.io">Tiercel partners with companies →</a>
                 </span>
               </p>
             </div>
