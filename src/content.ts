@@ -232,6 +232,7 @@ export const ANATOMY: AnatomyStep[] = [
   {
     label: 'Release',
     what: 'Store listing, then updates over the air.',
+    // FACT-CHECK: store names are assumed from "iPhone and Android"; the self-hosted OTA server on Railway is from the CV.
     tech: 'App Store, Google Play, self-hosted OTA on Railway',
   },
 ]
@@ -450,6 +451,7 @@ export const TIMELINE: TimelineEntry[] = [
   {
     org: 'Reelife',
     orgHref: 'https://apps.shopify.com/reelife',
+    // FACT-CHECK: "Founder" for Reelife is assumed; the CV says side project.
     role: 'Founder, side project',
     place: 'Shopify App Store',
     period: 'Jun 2023–now',
