@@ -1,21 +1,19 @@
 {
-  "name": "Raffay LLC",
-  "short_name": "Raffay LLC",
-  "description": "US-based software development company. Creators of Finly AI.",
+  "name": "Raffay Sajjad",
+  "short_name": "Raffay Sajjad",
+  "description": "Software engineer and founder in Lahore, Pakistan.",
   "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4f46e5",
-  "orientation": "portrait-primary",
+  "display": "browser",
+  "background_color": "#f7f5f0",
+  "theme_color": "#f7f5f0",
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
-  "categories": ["business", "productivity"],
-  "lang": "en-US",
+  "lang": "en",
   "dir": "ltr"
 }

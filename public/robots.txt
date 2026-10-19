@@ -1,40 +1,6 @@
-# robots.txt — Raffay LLC (https://raffayllc.com)
+# robots.txt for https://raffaysajjad.com
 
 User-agent: *
 Allow: /
 
-# Block access to source files
-Disallow: /src/
-Disallow: /*.tsx$
-Disallow: /*.ts$
-
-# Sitemap
-Sitemap: https://raffayllc.com/sitemap.xml
-
-# AI crawlers — explicitly allowed
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
+Sitemap: https://raffaysajjad.com/sitemap.xml
