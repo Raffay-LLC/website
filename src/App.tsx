@@ -48,7 +48,7 @@ function Footer() {
     <footer className="foot">
       <div className="wrap foot-in">
         <p>
-          © 2026 {PROFILE.name}. Made in Lahore. Updated <time dateTime={PROFILE.updatedIso}>{PROFILE.updated}</time>.
+          © 2026 {PROFILE.name}. Made with ❤️. Updated <time dateTime={PROFILE.updatedIso}>{PROFILE.updated}</time>.
         </p>
         <p className="foot-keys mono">
           <span>
