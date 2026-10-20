@@ -1,6 +1,7 @@
 // Build-time prerender. Runs after `vite build` and `vite build --ssr`:
 //   - renders every route in src/routes.ts to a string and writes it, with its
-//     own <title>, meta tags and JSON-LD, to dist/<route>/index.html so that
+//     own <title>, meta tags and JSON-LD, to a flat dist/<route>.html (not
+//     <route>/index.html, which Netlify would 301 to a trailing slash) so that
 //     crawlers that do not run JavaScript see the full page;
 //   - writes dist/sitemap.xml from the same route list;
 //   - writes netlify/functions/knowledge.json, the content the "Ask about my
@@ -40,7 +41,7 @@ for (const route of ROUTES) {
     .replace('<!--jsonld-->', () => jsonLd)
     .replace('<div id="root"></div>', () => `<div id="root">${html}</div>`)
 
-  const out = route === '/' ? path.join(dist, 'index.html') : path.join(dist, route, 'index.html')
+  const out = route === '/' ? path.join(dist, 'index.html') : path.join(dist, `${route}.html`)
   await mkdir(path.dirname(out), { recursive: true })
   await writeFile(out, page)
   console.log(`prerendered ${route} -> ${path.relative(root, out)} (${page.length} bytes)`)
